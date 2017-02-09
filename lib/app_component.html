@@ -1,17 +1,10 @@
-<h1>My First AngularDart App</h1>
-
-<material-input #myInput
-                label="Your name"
-                floatingLabel
-                autoFocus>
-</material-input>
-
-<material-button raised 
-                 (trigger)="myDialog.open()"
-                 class="blue">
-    Say Hello
-</material-button>
-
-<hello-dialog #myDialog
-             [name]="myInput.inputText">
-</hello-dialog>
+<nav>
+    <div class="nav-wrapper">
+        <a href="#" class="brand-logo">Logo</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="sass.html">Sass</a></li>
+            <li><a href="badges.html">Components</a></li>
+            <li><a href="collapsible.html">JavaScript</a></li>
+        </ul>
+    </div>
+</nav>
