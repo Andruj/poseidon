@@ -3,8 +3,8 @@
 
 import 'package:angular2/platform/browser.dart';
 
-import 'package:poseidon/app_component.dart';
+import 'package:poseidon/components.dart';
 
 main() {
-  bootstrap(AppComponent);
+  bootstrap(rootComponent);
 }

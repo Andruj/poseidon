@@ -1,15 +1,16 @@
 // Copyright (c) 2017, Andrew Peterson. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
-import 'package:angular2/core.dart';
-import 'package:angular2_components/angular2_components.dart';
+part of components;
 
 @Component(
   selector: 'app',
-  styleUrls: const ['app_component.css'],
-  templateUrl: 'app_component.html',
+  styleUrls: const ['src/components/app_component.css'],
+  templateUrl: 'src/components/app_component.html',
   directives: const [materialDirectives],
-  providers: const [materialProviders],
+  providers: const [materialProviders, appSingletons, appProviders],
 )
 class AppComponent {
+  FirebaseService firebase;
+  AppComponent(this.firebase);
 }
