@@ -6,7 +6,7 @@
     font-weight: 300;
 }
 .nav-wrapper {
-    padding: 0px 10px;
+    padding: 0px 15px;
 }
 
 material-button {
@@ -20,6 +20,8 @@ material-button {
 }
 
 material-button span {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
     padding-left: 5px;
 }
 
