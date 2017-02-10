@@ -1,0 +1,20 @@
+
+material-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%);
+    transform: translateX(-50%);
+    padding: 5px;
+    text-transform: none;
+}
+
+material-button span {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    padding-left: 5px;
+}
+
+#googleLogo {
+    padding-right: 5px;
+    height: 30px;
