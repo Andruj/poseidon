@@ -9,7 +9,10 @@ const messagingSenderId = "74668054832";
 
 @Injectable()
 class FirebaseService {
+  final Logger logger = new Logger('FirebaseService');
+
   Database _database;
+  Auth _auth;
   DatabaseReference _ref;
 
   FirebaseService() {
@@ -20,7 +23,18 @@ class FirebaseService {
         storageBucket: storageBucket);
 
     _database = database();
-    _ref = _database.ref("test");
-    _ref.set({ 'test' : 'new stuff' });
+    _auth = auth();
+
+    _auth.onAuthStateChanged.listen((AuthEvent event) {
+      User user = event.user;
+      logger.info('authenticated ${user.displayName}.');
+    });
+  }
+
+  authenticate(AuthProvider provider) async {
+    try {
+      await _auth.signInWithRedirect(provider);
+    } catch (ex) {
+    }
   }
 }

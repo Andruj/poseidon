@@ -13,4 +13,7 @@ part of components;
 class AppComponent {
   FirebaseService firebase;
   AppComponent(this.firebase);
+
+  login(UIEvent event) =>
+    firebase.authenticate(new GoogleAuthProvider());
 }

@@ -3,7 +3,11 @@
         <a href="#" class="brand-logo black-text">Poseidon</a>
     </div>
 </nav>
-<material-button raised class="white">
-    Login</material-button>
 
+<material-button
+        (trigger)="login($event)"
+        raised
+        class="white">
+    Login with Google</material-button>
+<div class="g-signin2" data-onsuccess="onSignIn"></div>
 
