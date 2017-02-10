@@ -11,9 +11,12 @@ part of components;
   providers: const [materialProviders, appSingletons, appProviders],
 )
 class AppComponent {
-  FirebaseService firebase;
-  AppComponent(this.firebase);
+  final Firebase firebase;
+  final Logger log = new Logger('AppComponent');
 
-  login(UIEvent event) =>
-    firebase.authenticate(new GoogleAuthProvider());
+  AppComponent(this.firebase) {
+    firebase.onUser.listen((_) => log.info('obtained user information.'));
+  }
+
+  login(UIEvent event) => firebase.authenticate(new GoogleAuthProvider());
 }

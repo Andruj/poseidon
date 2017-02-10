@@ -1,6 +1,6 @@
-<nav>
-    <div class="nav-wrapper white">
-        <a href="#" class="brand-logo black-text">Poseidon</a>
+<nav class="transparent z-depth-0">
+    <div class="nav-wrapper">
+        <a href="#" class="brand-logo white-text">Poseidon</a>
     </div>
 </nav>
 
@@ -8,6 +8,8 @@
         (trigger)="login($event)"
         raised
         class="white">
-    Login with Google</material-button>
+            <img id="googleLogo" src="/logo.jpg"/>
+            <span>Sign in with Google</span>
+    </material-button>
 <div class="g-signin2" data-onsuccess="onSignIn"></div>
 
