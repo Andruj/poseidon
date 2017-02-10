@@ -29,8 +29,11 @@ class Firebase {
 
     _auth.onAuthStateChanged.listen((AuthEvent event) {
       User user = event.user;
-      log.info('authenticated ${user.displayName}.');
-      onUser.emit(User);
+
+      if(user != null) {
+        log.info('authenticated ${user.displayName}.');
+        onUser.emit(User);
+      }
     });
   }
 
