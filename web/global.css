@@ -22,6 +22,7 @@ html {
     animation: pulse 1s 1;
 }
 
+
  @keyframes pulse {
       0% {
         opacity: 1.0;

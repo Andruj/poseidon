@@ -17,14 +17,18 @@ class DashboardComponent implements OnInit {
   String displayName;
   String photoUrl;
 
-
+  bool isDrawing = false;
   DashboardComponent(this.firebase);
 
   ngOnInit() {
-    if(firebase.hasUser) {
+    if (firebase.hasUser) {
       displayName = firebase.user.displayName;
       photoUrl = firebase.user.photoURL;
     }
+  }
 
+  newRegion() {
+    log.info('creating a new region for ${displayName}.');
+    firebase.addRegion('Hello World');
   }
 }

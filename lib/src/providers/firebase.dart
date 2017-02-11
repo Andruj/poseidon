@@ -13,9 +13,9 @@ class Firebase {
   Database _database;
   Auth _auth;
   DatabaseReference _ref;
+  DatabaseReference userRef;
 
   User user;
-
 
   /// Triggers an event when the [UserInfo] is loaded from Firebase.
   EventEmitter onUser = new EventEmitter();
@@ -33,9 +33,10 @@ class Firebase {
     _auth.onAuthStateChanged.listen((AuthEvent event) {
       User user = event.user;
 
-      if(user != null) {
+      if (user != null) {
         log.info('authenticated ${user.displayName}.');
         this.user = user;
+        userRef = _database.ref('users').child(user.uid);
         onUser.emit(User);
       }
     });
@@ -52,4 +53,15 @@ class Firebase {
   }
 
   get hasUser => user != null;
+
+  List<String> get regions {
+    userRef.onValue.listen((e) {
+      DataSnapshot snapshot = e.snapshot;
+      log.info(snapshot);
+    });
+  }
+
+  addRegion(String name) async {
+    userRef.child('regions').set('San Luis Obispo, CA');
+  }
 }

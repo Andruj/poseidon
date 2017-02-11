@@ -13,6 +13,12 @@ import 'package:poseidon/providers.dart';
 part 'src/components/app_component.dart';
 part 'src/components/login_component.dart';
 part 'src/components/dashboard_component.dart';
+part 'src/components/region_component.dart';
 
 const rootComponent = AppComponent;
-const appDirectives = const [AppComponent, LoginComponent, DashboardComponent];
+const appDirectives = const [
+  AppComponent,
+  LoginComponent,
+  DashboardComponent,
+  RegionComponent,
+];
