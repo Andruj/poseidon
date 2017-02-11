@@ -10,9 +10,21 @@ part of components;
   directives: const [materialDirectives, appDirectives],
   providers: const [materialProviders, appProviders],
 )
-class DashboardComponent {
+class DashboardComponent implements OnInit {
   final Firebase firebase;
   final Logger log = new Logger('DashboardComponent');
 
+  String displayName;
+  String photoUrl;
+
+
   DashboardComponent(this.firebase);
+
+  ngOnInit() {
+    if(firebase.hasUser) {
+      displayName = firebase.user.displayName;
+      photoUrl = firebase.user.photoURL;
+    }
+
+  }
 }

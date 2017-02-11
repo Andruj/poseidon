@@ -1,1 +1,70 @@
-<h1>Dashboard</h1>
+<div class="container-full">
+    <div class="row">
+        <div class="col s0 m0 l3 no-padding">
+            <div class="card sidebar">
+                    <div class="card-image">
+                        <img src="{{photoUrl}}">
+                        <div class="overlay-dark"></div>
+                        <span class="card-title">{{displayName}}</span>
+                    </div>
+                    <!--<div class="card-content">-->
+                        <!--<p>I am a very simple card. I am good at containing small bits of information.-->
+                            <!--I am convenient because I require little markup to use effectively.</p>-->
+                    <!--</div>-->
+                <div class="card-action blue-grey">
+                    <a href="#" class="white-text">Regions</a>
+                </div>
+                <div class="card-action">
+                    <a href="#" class="blue-grey-text">Watchlist</a>
+                </div>
+                <div class="card-action">
+                    <a href="#" class="blue-grey-text">Profile</a>
+                </div>
+                <div class="card-action"></div>
+            </div>
+        </div>
+        <div class="col s12 m12 l9">
+            <div class="row regions">
+            <material-expansionpanel-set>
+                <material-expansionpanel name="San Luis Obispo, CA">
+                    <div class="row">
+                        <div class="col s12">
+                            <div class="card horizontal z-depth-0">
+                                <div class="card-image">
+                                    <img src="/background.jpg">
+                                </div>
+                                <div class="card-stacked">
+                                    <div class="card-content">
+                                        <p>I am a very simple card. I am good at containing small bits of information.</p>
+                                    </div>
+                                    <div class="card-action">
+                                        <a href="#">This is a link</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </material-expansionpanel>
+                <material-expansionpanel name="Hood River, OR">
+                        <div class="col s12">
+                            <div class="card horizontal">
+                                <div class="card-image">
+                                    <img src="/background.jpg">
+                                </div>
+                                <div class="card-stacked">
+                                    <div class="card-content">
+                                        <p>I am a very simple card. I am good at containing small bits of information.</p>
+                                    </div>
+                                    <div class="card-action">
+                                        <a href="#">This is a link</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </material-expansionpanel>
+            </material-expansionpanel-set>
+            </div>
+
+        </div>
+    </div>
+</div>

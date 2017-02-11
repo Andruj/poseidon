@@ -1,3 +1,26 @@
 :host {
 background: white;
 }
+
+.no-padding {
+    padding: 0;
+}
+
+.overlay-dark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0,0,0,0.5);
+}
+
+.sidebar {
+    z-index: -1;
+    height: 100vh;
+    margin: 0;
+}
+
+.regions {
+    margin-top: 15px;
+}

@@ -1,9 +1,14 @@
 :host {
 }
 
-.brand-logo {
+.breadcrumb {
     font-family: 'Quicksand', sans-serif;
     font-weight: 300;
+    font-size: 1.8em;
+}
+
+.breadcrumb:before {
+    color: black;
 }
 .nav-wrapper {
     padding: 0px 15px;

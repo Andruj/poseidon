@@ -1,8 +1,18 @@
 <nav    [class.transparent]="isTransparent"
-        class="z-depth-0">
+        [class.white]="!isTransparent"
+        [class.z-depth-0]="isTransparent"
+        [class.z-depth-1]="!isTransparent">
 
     <div class="nav-wrapper">
-        <a href="#" class="brand-logo white-text">Poseidon</a>
+
+        <div class="col s12 black-text">
+            <a href="#"
+               [class.black-text]="!isTransparent"
+               [class.white-text]="isTransparent"
+               class="breadcrumb">Poseidon</a>
+            <a href="#!" class="breadcrumb black-text">Second</a>
+            <a href="#!" class="breadcrumb black-text">Third</a>
+        </div>
     </div>
 </nav>
 

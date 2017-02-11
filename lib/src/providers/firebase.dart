@@ -14,6 +14,9 @@ class Firebase {
   Auth _auth;
   DatabaseReference _ref;
 
+  User user;
+
+
   /// Triggers an event when the [UserInfo] is loaded from Firebase.
   EventEmitter onUser = new EventEmitter();
 
@@ -32,6 +35,7 @@ class Firebase {
 
       if(user != null) {
         log.info('authenticated ${user.displayName}.');
+        this.user = user;
         onUser.emit(User);
       }
     });
@@ -46,4 +50,6 @@ class Firebase {
       log.severe('failure authenticating.', e, stackTrace);
     }
   }
+
+  get hasUser => user != null;
 }

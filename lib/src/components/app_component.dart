@@ -40,6 +40,7 @@ class AppComponent {
     firebase.onUser.listen((_) {
       log.info('obtained user information.');
       router.navigate(['/Dashboard']);
+      isTransparent = false;
     });
   }
 }
