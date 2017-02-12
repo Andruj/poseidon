@@ -51,7 +51,12 @@ class AppComponent {
       if (path.isEmpty) {
         breadcrumbs.add('Poseidon');
       } else {
-        breadcrumbs.add(path);
+        List<String> locations = path.split('/');
+
+        String poseidon = breadcrumbs.first;
+        breadcrumbs.clear();
+        breadcrumbs.add(poseidon);
+        breadcrumbs.addAll(locations);
       }
     });
   }

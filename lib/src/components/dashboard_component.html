@@ -2,10 +2,13 @@
     <material-fab
             id="newRegion"
             class="white"
-            (click)="newRegion()"
+            (click)="addRegion()"
             raised>
         <glyph icon="add"></glyph>
     </material-fab>
+
+
+
     <div class="row">
         <div class="col s0 m0 l3 no-padding">
             <div class="card sidebar">
@@ -15,15 +18,16 @@
                     <span class="card-title">{{displayName}}</span>
                 </div>
                 <material-button
+                        (click)="navigateTo('./Regions')"
                         [class.blue-grey]="isSelected"
                         class="card-action">
                     <a      [class.white-text]="isSelected"
                             class="blue-grey-text">Regions</a>
                 </material-button>
-                <material-button class="card-action">
-                        <a class="blue-grey-text">Watchlist</a>
+                <material-button (click)="navigateTo('./WatchList')" class="card-action">
+                        <span class="blue-grey-text">Watchlist</span>
                 </material-button>
-                <material-button class="card-action">
+                <material-button (click)="navigateTo('./Profile')" class="card-action">
                     <a class="blue-grey-text">Profile</a>
                 </material-button>
                 <div class="card-action"></div>

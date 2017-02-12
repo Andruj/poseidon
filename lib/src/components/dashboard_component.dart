@@ -8,7 +8,17 @@ part of components;
       path: '/regions',
       component: RegionsComponent,
       name: 'Regions',
-      useAsDefault: true)
+      useAsDefault: true),
+  const Route(
+    path: '/watchlist',
+    component: WatchListComponent,
+    name: 'WatchList',
+  ),
+  const Route(
+    path: '/profile',
+    component: ProfileComponent,
+    name: 'Profile',
+  ),
 ])
 @Component(
   selector: 'dashboard',
@@ -25,10 +35,11 @@ class DashboardComponent implements OnInit {
   String displayName;
   String photoUrl;
 
+  bool isSelected = true;
   bool isDrawing = false;
+
   DashboardComponent(this.firebase, this.router);
 
-  bool isSelected = true;
 
   ngOnInit() {
     if (firebase.hasUser) {
@@ -37,8 +48,11 @@ class DashboardComponent implements OnInit {
     }
   }
 
-  newRegion() {
-    log.info('creating a new region for ${displayName}.');
-    firebase.addRegion('Hello World');
+  navigateTo(String location) {
+    router.navigate([location]);
+  }
+
+  addRegion() {
+    log.info('onClick: setup new region.');
   }
 }
