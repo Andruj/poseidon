@@ -42,5 +42,9 @@ class AppComponent {
       router.navigate(['/Dashboard']);
       isTransparent = false;
     });
+
+    router.onStartNavigation.listen((String path) {
+      log.info('navigating to $path');
+    });
   }
 }
