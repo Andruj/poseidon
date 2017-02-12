@@ -10,7 +10,7 @@ part of components;
       name: 'Login',
       useAsDefault: true),
   const Route(
-      path: '/dashboard', component: DashboardComponent, name: 'Dashboard')
+      path: '/dashboard/...', component: DashboardComponent, name: 'Dashboard')
 ])
 @Component(
   selector: 'app',
@@ -36,6 +36,8 @@ class AppComponent {
 
   bool isTransparent = true;
 
+  final List<String> breadcrumbs = [];
+
   AppComponent(this.firebase, this.router) {
     firebase.onUser.listen((_) {
       log.info('obtained user information.');
@@ -45,6 +47,12 @@ class AppComponent {
 
     router.onStartNavigation.listen((String path) {
       log.info('navigating to $path');
+      // The base path.
+      if (path.isEmpty) {
+        breadcrumbs.add('Poseidon');
+      } else {
+        breadcrumbs.add(path);
+      }
     });
   }
 }

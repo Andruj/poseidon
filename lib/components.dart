@@ -14,6 +14,8 @@ part 'src/components/app_component.dart';
 part 'src/components/login_component.dart';
 part 'src/components/dashboard_component.dart';
 part 'src/components/region_component.dart';
+part 'src/components/regions_component.dart';
+
 
 const rootComponent = AppComponent;
 const appDirectives = const [
@@ -21,4 +23,5 @@ const appDirectives = const [
   LoginComponent,
   DashboardComponent,
   RegionComponent,
+  RegionsComponent,
 ];

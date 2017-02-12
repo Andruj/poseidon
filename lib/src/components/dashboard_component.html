@@ -14,23 +14,24 @@
                     <div class="overlay-dark"></div>
                     <span class="card-title">{{displayName}}</span>
                 </div>
-                <div class="card-action blue-grey">
-                    <a href="#" class="white-text">Regions</a>
-                </div>
-                <div class="card-action">
-                    <a href="#" class="blue-grey-text">Watchlist</a>
-                </div>
-                <div class="card-action">
-                    <a href="#" class="blue-grey-text">Profile</a>
-                </div>
+                <material-button
+                        [class.blue-grey]="isSelected"
+                        class="card-action">
+                    <a      [class.white-text]="isSelected"
+                            class="blue-grey-text">Regions</a>
+                </material-button>
+                <material-button class="card-action">
+                        <a class="blue-grey-text">Watchlist</a>
+                </material-button>
+                <material-button class="card-action">
+                    <a class="blue-grey-text">Profile</a>
+                </material-button>
                 <div class="card-action"></div>
             </div>
         </div>
         <div class="col s12 m12 l9">
             <div class="row regions">
-            <material-expansionpanel-set>
-                <region></region>
-            </material-expansionpanel-set>
+               <router-outlet></router-outlet>
             </div>
         </div>
     </div>

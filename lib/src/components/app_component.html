@@ -6,12 +6,12 @@
     <div class="nav-wrapper">
 
         <div class="col s12 black-text">
-            <a href="#"
+            <a href="#" *ngFor="let breadcrumb of breadcrumbs"
                [class.black-text]="!isTransparent"
                [class.white-text]="isTransparent"
-               class="breadcrumb">Poseidon</a>
-            <a href="#!" class="breadcrumb black-text">Second</a>
-            <a href="#!" class="breadcrumb black-text">Third</a>
+               class="breadcrumb">
+                {{breadcrumb}}
+            </a>
         </div>
     </div>
 </nav>
