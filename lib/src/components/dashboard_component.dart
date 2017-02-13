@@ -10,11 +10,6 @@ part of components;
       name: 'Regions',
       useAsDefault: true),
   const Route(
-    path: '/watchlist',
-    component: WatchListComponent,
-    name: 'WatchList',
-  ),
-  const Route(
     path: '/profile',
     component: ProfileComponent,
     name: 'Profile',
