@@ -47,7 +47,7 @@ class AppComponent {
 
     router.onStartNavigation.listen((String path) {
       log.info('navigating to $path');
-      // The base path.
+
       if (path.isEmpty) {
         breadcrumbs.add('Poseidon');
       } else {

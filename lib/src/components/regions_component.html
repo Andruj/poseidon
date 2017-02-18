@@ -1,4 +1,7 @@
 
 <material-expansionpanel-set>
-    <region></region>
+    <material-expansionpanel *ngFor="#region of regions"
+            showSaveCancel="false" [name]="region.name">
+        <region [region]="region"></region>
+    </material-expansionpanel>
 </material-expansionpanel-set>

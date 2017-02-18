@@ -14,8 +14,12 @@ class RegionComponent implements OnInit {
   final Firebase firebase;
   final Logger log = new Logger('RegionComponent');
 
+  @Input()
+  Region region;
+
   RegionComponent(this.firebase);
 
   ngOnInit() {
+    log.info(region);
   }
 }

@@ -10,11 +10,22 @@ part of components;
   directives: const [materialDirectives, appDirectives],
   providers: const [materialProviders, appProviders],
 )
-class RegionsComponent implements OnInit {
+class RegionsComponent implements OnInit, OnDestroy {
+  final Firebase firebase;
   final Logger log = new Logger('RegionsComponent');
 
-  RegionsComponent();
+  List<Region> regions = [];
+
+  RegionsComponent(this.firebase) {
+    firebase.regions.onValue.listen((QueryEvent e) {
+      regions = e.snapshot.val().map(Region.fromJSON).toList();
+      log.info('acquired ${regions.length} regions.');
+    });
+  }
 
   ngOnInit() {
+  }
+
+  ngOnDestroy() {
   }
 }

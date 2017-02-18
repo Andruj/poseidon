@@ -13,7 +13,8 @@ class Firebase {
   Database _database;
   Auth _auth;
   DatabaseReference _ref;
-  DatabaseReference userRef;
+  DatabaseReference root;
+  DatabaseReference regions;
 
   User user;
 
@@ -31,13 +32,15 @@ class Firebase {
     _auth = auth();
 
     _auth.onAuthStateChanged.listen((AuthEvent event) {
-      User user = event.user;
-
-      if (user != null) {
+      if (event.user != null) {
+        user = event.user;
         log.info('authenticated ${user.displayName}.');
-        this.user = user;
-        userRef = _database.ref('users').child(user.uid);
-        onUser.emit(User);
+
+        // Set up the database access points for the user.
+        root = _database.ref('users').child(user.uid);
+        regions = root.child('regions');
+
+        onUser.emit(user);
       }
     });
   }
@@ -54,14 +57,25 @@ class Firebase {
 
   get hasUser => user != null;
 
-  List<String> get regions {
-    userRef.onValue.listen((e) {
-      DataSnapshot snapshot = e.snapshot;
-      log.info(snapshot);
-    });
+  addRegion(String name) async {
+    root.child('regions').set('San Luis Obispo, CA');
+  }
+}
+
+class Region {
+  final String name;
+
+  static Region fromJSON(Map json) {
+    return new Region(json['name']);
   }
 
-  addRegion(String name) async {
-    userRef.child('regions').set('San Luis Obispo, CA');
+  const Region(this.name);
+
+  @override
+  String toString() {
+    return '''
+
+[Region
+    (name: $name)]''';
   }
 }
