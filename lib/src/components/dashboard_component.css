@@ -6,12 +6,7 @@ background: white;
     padding: 0;
 }
 
-#newRegion {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    margin: 15px;
-}
+
 
 .overlay-dark {
     position: absolute;
@@ -49,4 +44,11 @@ background: white;
 
 .card-action a {
     padding: 0;
+}
+
+.scrollable {
+
+    height: calc(100vh - 64px);
+    overflow-y: scroll;
+
 }

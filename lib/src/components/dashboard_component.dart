@@ -44,9 +44,4 @@ class DashboardComponent implements OnInit {
   navigateTo(String location) {
     router.navigate([location]);
   }
-
-  addRegion() {
-    log.info('onClick: setting up new region.');
-    firebase.addRegion(new Region("San Luis Obispo, CA"));
-  }
 }

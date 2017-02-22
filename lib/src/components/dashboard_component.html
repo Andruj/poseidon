@@ -1,14 +1,4 @@
 <div class="container-full">
-    <material-fab
-            id="newRegion"
-            class="white"
-            (click)="addRegion()"
-            raised>
-        <glyph icon="add"></glyph>
-    </material-fab>
-
-
-
     <div class="row">
         <div class="col s0 m0 l3 no-padding">
             <div class="card sidebar">
@@ -30,7 +20,7 @@
                 <div class="card-action"></div>
             </div>
         </div>
-        <div class="col s12 m12 l9">
+        <div class="col s12 m12 l9 scrollable">
             <div class="row regions">
                <router-outlet></router-outlet>
             </div>

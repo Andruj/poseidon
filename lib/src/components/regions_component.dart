@@ -26,4 +26,9 @@ class RegionsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
   }
+
+  addRegion() {
+    log.info('onClick: setting up new region.');
+    firebase.addRegion(new Region("San Luis Obispo, CA"));
+  }
 }

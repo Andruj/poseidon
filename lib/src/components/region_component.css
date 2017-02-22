@@ -8,10 +8,14 @@
 }
 
 #delete {
-    z-index: 9999;
+    z-index: 9000;
     position: absolute;
     bottom: 0;
     right: 0;
     margin-right: 15px;
     margin-bottom: -8px;
+}
+
+material-tab {
+    height: 100px;
 }
