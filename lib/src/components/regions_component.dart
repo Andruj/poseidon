@@ -16,6 +16,8 @@ class RegionsComponent implements OnInit, OnDestroy {
 
   Map<String, Region> regions = {};
 
+  bool isVisible = true;
+
   RegionsComponent(this.firebase) {
     regions = firebase.regions;
   }
@@ -24,11 +26,12 @@ class RegionsComponent implements OnInit, OnDestroy {
     log.info("there are ${regions.isNotEmpty ? "" : "no"} regions here.");
   }
 
-  ngOnDestroy() {
-  }
+  ngOnDestroy() {}
 
   addRegion() {
     log.info('onClick: setting up new region.');
     firebase.addRegion(new Region("San Luis Obispo, CA"));
   }
+
+  toggleFab() => isVisible = !isVisible;
 }

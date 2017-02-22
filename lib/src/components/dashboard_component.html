@@ -1,14 +1,15 @@
 <div class="container-full">
     <div class="row">
-        <div class="col s0 m0 l3 no-padding">
+        <div class="col s0 m2 l3 no-padding">
             <div class="card sidebar">
                 <div class="card-image">
                     <img src="{{photoUrl}}">
-                    <div class="overlay-dark"></div>
-                    <span class="card-title">{{displayName}}</span>
+                    <div class="photo-overlay"></div>
+                    <span class="hide-on-med-and-down truncate card-title quicksand">{{displayName}}</span>
                 </div>
                 <material-button
                         (click)="navigateTo('./Regions')"
+                        [class.lighten-1]="isSelected"
                         [class.blue-grey]="isSelected"
                         class="card-action">
                     <a      [class.white-text]="isSelected"
@@ -20,8 +21,8 @@
                 <div class="card-action"></div>
             </div>
         </div>
-        <div class="col s12 m12 l9 scrollable">
-            <div class="row regions">
+        <div class="col s12 m10 l9 scrollable calc-height">
+            <div class="row view-padding">
                <router-outlet></router-outlet>
             </div>
         </div>

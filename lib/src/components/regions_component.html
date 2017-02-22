@@ -1,15 +1,19 @@
-
 <material-fab
         id="newRegion"
-        class="blue-grey darken-3 white-text"
+        class="white blue-grey-text scale-transition"
+        [class.scale-in]="isVisible"
+        [class.scale-out]="!isVisible"
         (click)="addRegion()"
         raised>
     <glyph icon="add"></glyph>
 </material-fab>
 
 <material-expansionpanel-set>
-    <material-expansionpanel *ngFor="#key of regions.keys"
-            showSaveCancel="false" [name]="regions[key].name">
+    <material-expansionpanel
+            *ngFor="#key of regions.keys"
+            showSaveCancel="false"
+            (expandedChange)="toggleFab()"
+            [name]="regions[key].name">
         <region [region]="regions[key]" [id]="key"></region>
     </material-expansionpanel>
 </material-expansionpanel-set>

@@ -1,14 +1,11 @@
-:host {
-}
-
 .breadcrumb {
-    font-family: 'Quicksand', sans-serif;
     font-weight: 300;
     font-size: 1.8em;
 }
 
 .breadcrumb:before {
-    color: black;
+    /* blue-grey lighten-1 */
+    color: #607d8b;
 }
 
 .nav-wrapper {
