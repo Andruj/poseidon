@@ -1,4 +1,17 @@
+:host {
+    position: inherit;
+}
+
 .negative-margin {
     margin-left: -24px;
     margin-right: -24px;
+}
+
+#delete {
+    z-index: 9999;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-right: 15px;
+    margin-bottom: -8px;
 }

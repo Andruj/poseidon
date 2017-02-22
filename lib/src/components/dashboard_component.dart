@@ -31,10 +31,8 @@ class DashboardComponent implements OnInit {
   String photoUrl;
 
   bool isSelected = true;
-  bool isDrawing = false;
 
   DashboardComponent(this.firebase, this.router);
-
 
   ngOnInit() {
     if (firebase.hasUser) {
@@ -48,6 +46,7 @@ class DashboardComponent implements OnInit {
   }
 
   addRegion() {
-    log.info('onClick: setup new region.');
+    log.info('onClick: setting up new region.');
+    firebase.addRegion(new Region("San Luis Obispo, CA"));
   }
 }

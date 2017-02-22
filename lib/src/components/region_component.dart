@@ -17,9 +17,15 @@ class RegionComponent implements OnInit {
   @Input()
   Region region;
 
+  @Input()
+  String id;
+
   RegionComponent(this.firebase);
 
-  ngOnInit() {
-    log.info(region);
+  ngOnInit() {}
+
+  /// Deletes a region from Firebase.
+  delete() {
+    firebase.deleteRegionById(id);
   }
 }

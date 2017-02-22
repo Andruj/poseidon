@@ -1,7 +1,7 @@
 
 <material-expansionpanel-set>
-    <material-expansionpanel *ngFor="#region of regions"
-            showSaveCancel="false" [name]="region.name">
-        <region [region]="region"></region>
+    <material-expansionpanel *ngFor="#key of regions.keys"
+            showSaveCancel="false" [name]="regions[key].name">
+        <region [region]="regions[key]" [id]="key"></region>
     </material-expansionpanel>
 </material-expansionpanel-set>

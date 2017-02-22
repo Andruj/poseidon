@@ -14,16 +14,14 @@ class RegionsComponent implements OnInit, OnDestroy {
   final Firebase firebase;
   final Logger log = new Logger('RegionsComponent');
 
-  List<Region> regions = [];
+  Map<String, Region> regions = {};
 
   RegionsComponent(this.firebase) {
-    firebase.regions.onValue.listen((QueryEvent e) {
-      regions = e.snapshot.val().map(Region.fromJSON).toList();
-      log.info('acquired ${regions.length} regions.');
-    });
+    regions = firebase.regions;
   }
 
   ngOnInit() {
+    log.info("there are ${regions.isNotEmpty ? "" : "no"} regions here.");
   }
 
   ngOnDestroy() {

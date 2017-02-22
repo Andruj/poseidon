@@ -12,10 +12,11 @@ class Firebase {
 
   Database _database;
   Auth _auth;
-  DatabaseReference _ref;
-  DatabaseReference root;
-  DatabaseReference regions;
 
+  DatabaseReference _userNode;
+  DatabaseReference _regionsNode;
+
+  Map<String, Region> regions = {};
   User user;
 
   /// Triggers an event when the [UserInfo] is loaded from Firebase.
@@ -37,8 +38,20 @@ class Firebase {
         log.info('authenticated ${user.displayName}.');
 
         // Set up the database access points for the user.
-        root = _database.ref('users').child(user.uid);
-        regions = root.child('regions');
+        _userNode = _database.ref('users').child(user.uid);
+        _regionsNode = _userNode.child('regions');
+
+        _regionsNode.onValue.listen((QueryEvent event) {
+          if (event.snapshot.exists()) {
+            regions.clear();
+            Map data = event.snapshot.val();
+
+            regions.addAll(new Map.fromIterables(
+                data.keys, data.values.map(Region.fromMap)));
+
+            log.info('acquired ${regions.length} regions.');
+          }
+        });
 
         onUser.emit(user);
       }
@@ -57,16 +70,20 @@ class Firebase {
 
   get hasUser => user != null;
 
-  addRegion(String name) async {
-    root.child('regions').set('San Luis Obispo, CA');
-  }
+  addRegion(Region region) => _regionsNode.push(Region.toMap(region));
+
+  deleteRegionById(String id) => _regionsNode.child(id).remove();
 }
 
 class Region {
   final String name;
 
-  static Region fromJSON(Map json) {
+  static Region fromMap(Map json) {
     return new Region(json['name']);
+  }
+
+  static Map toMap(Region region) {
+    return {'name': region.name};
   }
 
   const Region(this.name);
