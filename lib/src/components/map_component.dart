@@ -10,7 +10,7 @@ part of components;
   directives: const [materialDirectives, appDirectives],
   providers: const [materialProviders, appProviders],
 )
-class MapComponent implements OnInit, AfterViewChecked {
+class MapComponent implements OnInit, AfterViewChecked, AfterViewInit {
   final Firebase firebase;
   final Logger log = new Logger('MapComponent');
 
@@ -22,18 +22,23 @@ class MapComponent implements OnInit, AfterViewChecked {
   @Input()
   String id;
 
+  @ViewChild('map')
+  ElementRef mapReference;
+
   MapComponent(this.firebase) {}
 
   ngAfterViewChecked() {
-    Element mapElement = document.getElementById("map");
-    if(mapElement != null) {
-      log.info('initializing Google Maps.');
-      final mapOptions = new MapOptions()
-        ..zoom = 8
-        ..center = new LatLng(-34.397, 150.644);
+    // Refresh the map since the tab height changed.
+    event.trigger(map, 'resize', null);
+  }
 
-      map = new GMap(document.getElementById("map"), mapOptions);
-    }
+  ngAfterViewInit() {
+    log.info('initializing Google Maps.');
+    final mapOptions = new MapOptions()
+      ..zoom = 8
+      ..center = new LatLng(-34.397, 150.644);
+
+    map = new GMap(this.mapReference.nativeElement, mapOptions);
   }
 
   ngOnInit() {}

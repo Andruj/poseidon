@@ -1,6 +1,6 @@
 library components;
 
-import 'dart:html';
+import 'dart:html' hide Event;
 
 import 'package:angular2/angular2.dart';
 import 'package:angular2/router.dart';
