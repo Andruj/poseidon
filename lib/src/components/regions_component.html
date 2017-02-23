@@ -1,9 +1,40 @@
+<modal [(visible)]="showDialog">
+    <material-dialog class="basic-dialog"
+                     (dismiss)="resetDialog()"
+                     [autoDismissable]="showDialog">
+        <h3 header>{{newRegionName.isEmpty ? "Create Region" : newRegionName}}</h3>
+        <div class="row">
+            <div class="col s12 no-padding">
+                <input placeholder="Region name..." [(ngModel)]="newRegionName"/>
+            </div>
+        </div>
+
+
+        <div footer>
+            <material-button autoFocus
+                             clear-size
+                             (trigger)="addRegion()"
+                             class="green-text">
+                Create
+            </material-button>
+            <material-button autoFocus
+                             clear-size
+                             (trigger)="resetDialog()"
+                             class="red-text">
+                Cancel
+            </material-button>
+        </div>
+    </material-dialog>
+</modal>
+
+
 <material-fab
         id="newRegion"
         class="white blue-grey-text scale-transition"
-        [class.scale-in]="isVisible"
-        [class.scale-out]="!isVisible"
-        (click)="addRegion()"
+        [class.scale-in]="fabVisible"
+        [class.scale-out]="fabHidden"
+        [disabled]="showDialog"
+        (click)="showDialog = true"
         raised>
     <glyph icon="add"></glyph>
 </material-fab>
@@ -14,6 +45,6 @@
             showSaveCancel="false"
             (expandedChange)="toggleFab()"
             [name]="regions[key].name">
-        <region [region]="regions[key]" [id]="key"></region>
+        <region [region]="regions[key]" [id]="key" (delete)="toggleFab()"></region>
     </material-expansionpanel>
 </material-expansionpanel-set>

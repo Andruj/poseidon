@@ -20,6 +20,9 @@ class RegionComponent implements OnInit {
   @Input()
   String id;
 
+  @Output("delete")
+  final EventEmitter onDelete = new EventEmitter<String>();
+
   RegionComponent(this.firebase);
 
   ngOnInit() {}
@@ -27,5 +30,6 @@ class RegionComponent implements OnInit {
   /// Deletes a region from Firebase.
   delete() {
     firebase.deleteRegionById(id);
+    onDelete.emit(id);
   }
 }

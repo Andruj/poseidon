@@ -1,4 +1,18 @@
 
+.basic-dialog,
+.basic-scrolling-dialog,
+.max-height-dialog,
+.headered-dialog,
+.custom-colors-dialog,
+.no-header-footer-dialog {
+  width: 480px;
+}
+
+.basic-dialog material-button {
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
 material-expansionpanel-set {
     position: relative;
 }
