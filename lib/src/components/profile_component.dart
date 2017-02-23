@@ -5,7 +5,7 @@ part of components;
 
 @Component(
   selector: 'profile',
-  template: '<material-spinner></material-spinner>',
+  templateUrl: 'src/components/profile_component.html',
   directives: const [materialDirectives, appDirectives],
   providers: const [materialProviders, appProviders],
 )

@@ -36,6 +36,10 @@ html {
     padding: 0;
 }
 
+.no-top-padding {
+    padding-top: 0;
+}
+
 /* The overlay for the white bloom transition when loaded */
 .overlay {
     position: absolute;
