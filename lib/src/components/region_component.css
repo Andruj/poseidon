@@ -16,6 +16,20 @@
     margin-bottom: -8px;
 }
 
+/* Sets the height for the child tabs. */
+material-tab-panel {
+    position: relative;
+    margin: 0;
+    height: 400px;
+}
+
+/* Removes excess padding on the tabs. */
 material-tab {
-    height: 100px;
+    padding: 0 !important;
+}
+
+map, calendar {
+    height: calc(400px - 48px);
+    width: 100%;
+    padding: 0;
 }

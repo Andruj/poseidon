@@ -7,6 +7,7 @@ import 'package:angular2/router.dart';
 import 'package:angular2_components/angular2_components.dart';
 import 'package:firebase/firebase.dart';
 import 'package:logging/logging.dart';
+import 'package:google_maps/google_maps.dart';
 
 import 'package:poseidon/providers.dart';
 
@@ -16,6 +17,8 @@ part 'src/components/dashboard_component.dart';
 part 'src/components/region_component.dart';
 part 'src/components/regions_component.dart';
 part 'src/components/profile_component.dart';
+part 'src/components/map_component.dart';
+part 'src/components/calendar_component.dart';
 
 const rootComponent = AppComponent;
 const appDirectives = const [
@@ -25,4 +28,6 @@ const appDirectives = const [
   RegionComponent,
   RegionsComponent,
   ProfileComponent,
+  MapComponent,
+  CalendarComponent,
 ];

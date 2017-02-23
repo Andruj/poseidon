@@ -1,0 +1,4 @@
+#map {
+    height: calc(400px - 48px + 16px);
+    width: 100%;
+}

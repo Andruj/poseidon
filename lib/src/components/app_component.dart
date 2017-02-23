@@ -5,7 +5,7 @@ part of components;
 
 @RouteConfig(const [
   const Route(
-      path: '/login',
+      path: '/',
       component: LoginComponent,
       name: 'Login',
       useAsDefault: true),
