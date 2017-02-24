@@ -35,7 +35,12 @@
     <material-tab class="z-depth-0" label="Map">
         <map [region]="region" [id]="id"></map>
     </material-tab>
-    <material-tab class="z-depth-0" label="Wind">
+    <material-tab class="z-depth-0" label="Details">
+        <div class="row">
+            <div class="col s12">
+                <input [(ngModel)]="region.name" (keyup)="update()"/>
+            </div>
+        </div>
     </material-tab>
 </material-tab-panel>
 

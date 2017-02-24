@@ -48,6 +48,12 @@ class RegionComponent implements OnInit {
     showDeleteDialog = false;
   }
 
+  /// Updates the region on firebase.
+  update() {
+    log.info('updating $id to $region');
+    firebase.updateRegion(id, region);
+  }
+
   get addingLocation => mapComponent.addingLocation;
   set addingLocation(flag) => mapComponent.addingLocation = flag;
 

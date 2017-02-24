@@ -41,9 +41,15 @@ class Firebase {
         _userNode = _database.ref('users').child(user.uid);
         _regionsNode = _userNode.child('regions');
 
+        // Clear the regions and fill the empty map with the new data.
+        // This is not optimal, but since regions currently are so light,
+        // the computation is ignored.
         _regionsNode.onValue.listen((QueryEvent event) {
+          // We always clear, since if they delete the last region
+          // it will not go into next branch.
+          regions.clear();
+
           if (event.snapshot.exists()) {
-            regions.clear();
             Map data = event.snapshot.val();
 
             regions.addAll(new Map.fromIterables(
@@ -72,11 +78,14 @@ class Firebase {
 
   addRegion(Region region) => _regionsNode.push(Region.toMap(region));
 
+  updateRegion(String id, Region region) =>
+      _regionsNode.child(id).update(Region.toMap(region));
+
   deleteRegionById(String id) => _regionsNode.child(id).remove();
 }
 
 class Region {
-  final String name;
+  String name;
 
   static Region fromMap(Map json) {
     return new Region(json['name']);
@@ -86,7 +95,7 @@ class Region {
     return {'name': region.name};
   }
 
-  const Region(this.name);
+  Region(this.name);
 
   @override
   String toString() {

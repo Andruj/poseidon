@@ -5,13 +5,13 @@
         <h3 header>{{newRegionName.isEmpty ? "Create Region" : newRegionName}}</h3>
         <div class="row">
             <div class="col s12 no-padding">
-                <input placeholder="Region name..." [(ngModel)]="newRegionName"/>
+                <input autofocus placeholder="Region name..." [(ngModel)]="newRegionName"/>
             </div>
         </div>
 
 
         <div footer>
-            <material-button autoFocus
+            <material-button
                              clear-size
                              (trigger)="addRegion()"
                              class="green-text">
