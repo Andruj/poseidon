@@ -1,4 +1,4 @@
-<material-tab-panel class="negative-margin">
+<material-tab-panel (tabChange)="tabChanged($event)" class="negative-margin">
     <material-tab class="z-depth-0" label="Calendar">
         <calendar [region]="region" [id]="id"></calendar>
     </material-tab>
@@ -9,10 +9,29 @@
     </material-tab>
 </material-tab-panel>
 
-<material-fab
-        id="delete"
-        class="red lighten-2 white-text"
-        (click)="delete()"
-        mini raised>
-    <glyph icon="remove"></glyph>
-</material-fab>
+<div class="buttons">
+
+    <material-fab
+            id="add_location"
+            class="green white-text lighten-2 scale-transition"
+
+            [class.grey]="mapComponent.shouldAddLocation"
+            [class.darken-1]="mapComponent.shouldAddLocation"
+            [disabled]="mapComponent.shouldAddLocation"
+
+            [class.scale-in]="addLocationVisible"
+            [class.scale-out]="!addLocationVisible"
+
+            (click)="enterAddMode()"
+            mini raised>
+        <glyph icon="add_location"></glyph>
+    </material-fab>
+
+    <material-fab
+            id="delete"
+            class="red lighten-2 white-text"
+            (click)="delete()"
+            mini raised>
+        <glyph icon="remove"></glyph>
+    </material-fab>
+</div>

@@ -3,6 +3,10 @@
 
 part of components;
 
+const _calendarTab = 0;
+const _mapTab = 1;
+const _windTab = 2;
+
 @Component(
   selector: 'region',
   styleUrls: const ['src/components/region_component.css'],
@@ -14,6 +18,9 @@ class RegionComponent implements OnInit {
   final Firebase firebase;
   final Logger log = new Logger('RegionComponent');
 
+  @ViewChild(MapComponent)
+  MapComponent mapComponent;
+
   @Input()
   Region region;
 
@@ -22,6 +29,9 @@ class RegionComponent implements OnInit {
 
   @Output("delete")
   final EventEmitter onDelete = new EventEmitter<String>();
+
+  /// Determines whether the 'add location' FAB is visible to the user.
+  bool addLocationVisible = false;
 
   RegionComponent(this.firebase);
 
@@ -32,4 +42,9 @@ class RegionComponent implements OnInit {
     firebase.deleteRegionById(id);
     onDelete.emit(id);
   }
+
+  enterAddMode() => mapComponent.shouldAddLocation = true;
+
+  tabChanged(TabChangeEvent event) =>
+      addLocationVisible = event.newIndex == _mapTab;
 }

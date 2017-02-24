@@ -7,7 +7,7 @@
     margin-right: -24px;
 }
 
-#delete {
+.buttons {
     z-index: 9000;
     position: absolute;
     bottom: 0;

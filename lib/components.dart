@@ -1,6 +1,6 @@
 library components;
 
-import 'dart:html' hide Event;
+import 'dart:html' hide Event, MouseEvent;
 
 import 'package:angular2/angular2.dart';
 import 'package:angular2/router.dart';
