@@ -1,3 +1,33 @@
+<modal [(visible)]="showDeleteDialog">
+    <material-dialog class="basic-dialog"
+                     (dismiss)="showDeleteDialog = false"
+                     [autoDismissable]="showDeleteDialog">
+        <h3 header>Confirm Delete</h3>
+        <div class="row">
+            <div class="col s12 no-padding">
+                <div>Are you sure you want to delete {{region.name}}?</div>
+            </div>
+        </div>
+        <div footer>
+            <material-button
+                clear-size
+                (trigger)="delete()"
+                class="red-text">
+                Delete
+            </material-button>
+            <material-button
+                autoFocus
+                clear-size
+                (trigger)="showDeleteDialog = false"
+                class="grey-text text-darken-1">
+                Cancel
+            </material-button>
+        </div>
+    </material-dialog>
+</modal>
+
+
+
 <material-tab-panel (tabChange)="tabChanged($event)" class="negative-margin">
     <material-tab class="z-depth-0" label="Calendar">
         <calendar [region]="region" [id]="id"></calendar>
@@ -10,27 +40,30 @@
 </material-tab-panel>
 
 <div class="buttons">
-
     <material-fab
             id="add_location"
-            class="green white-text lighten-2 scale-transition"
+            class="white-text lighten-2 scale-transition"
 
-            [class.grey]="mapComponent.shouldAddLocation"
-            [class.darken-1]="mapComponent.shouldAddLocation"
-            [disabled]="mapComponent.shouldAddLocation"
+            [class.green]="!addingLocation"
+            [class.grey]="addingLocation"
+            [class.darken-1]="addingLocation"
 
-            [class.scale-in]="addLocationVisible"
-            [class.scale-out]="!addLocationVisible"
+            [class.scale-in]="inMapTab"
+            [class.scale-out]="!inMapTab"
 
-            (click)="enterAddMode()"
+            (click)="toggleAddingLocation()"
             mini raised>
-        <glyph icon="add_location"></glyph>
+
+        <glyph *ngIf="!addingLocation" icon="add_location"></glyph>
+        <glyph *ngIf="addingLocation" icon="clear"></glyph>
+
     </material-fab>
 
     <material-fab
             id="delete"
             class="red lighten-2 white-text"
-            (click)="delete()"
+            (click)="showDeleteDialog = true"
+            [disabled]="showDeleteDialog"
             mini raised>
         <glyph icon="remove"></glyph>
     </material-fab>

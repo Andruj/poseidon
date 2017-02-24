@@ -17,7 +17,7 @@ class MapComponent implements OnInit, AfterViewChecked, AfterViewInit {
 
 
   /// Determines whether the map should be in a display or add state.
-  bool shouldAddLocation = false;
+  bool addingLocation = false;
 
   GMap map;
 
@@ -51,9 +51,9 @@ class MapComponent implements OnInit, AfterViewChecked, AfterViewInit {
       // with all wind sensors, not just the user selected ones (but
       // distinguish among the two) then let the user pick one
       // to add.
-      if(shouldAddLocation) {
+      if(addingLocation) {
         log.info('coordinates: ${event.latLng}');
-        shouldAddLocation = false;
+        addingLocation = false;
       }
     });
 

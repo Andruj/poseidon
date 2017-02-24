@@ -8,7 +8,7 @@
 }
 
 .buttons {
-    z-index: 9000;
+    z-index: 1000;
     position: absolute;
     bottom: 0;
     right: 0;
@@ -32,4 +32,9 @@ map, calendar {
     height: calc(400px - 48px);
     width: 100%;
     padding: 0;
+}
+
+.basic-dialog material-button {
+    margin-left: 4px;
+    margin-right: 4px;
 }

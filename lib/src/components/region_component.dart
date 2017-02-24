@@ -31,7 +31,10 @@ class RegionComponent implements OnInit {
   final EventEmitter onDelete = new EventEmitter<String>();
 
   /// Determines whether the 'add location' FAB is visible to the user.
-  bool addLocationVisible = false;
+  bool inMapTab = false;
+
+
+  bool showDeleteDialog = false;
 
   RegionComponent(this.firebase);
 
@@ -41,10 +44,15 @@ class RegionComponent implements OnInit {
   delete() {
     firebase.deleteRegionById(id);
     onDelete.emit(id);
+
+    showDeleteDialog = false;
   }
 
-  enterAddMode() => mapComponent.shouldAddLocation = true;
+  get addingLocation => mapComponent.addingLocation;
+  set addingLocation(flag) => mapComponent.addingLocation = flag;
+
+  toggleAddingLocation() => addingLocation = !addingLocation;
 
   tabChanged(TabChangeEvent event) =>
-      addLocationVisible = event.newIndex == _mapTab;
+      inMapTab = event.newIndex == _mapTab;
 }
