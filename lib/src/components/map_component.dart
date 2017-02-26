@@ -13,8 +13,8 @@ part of components;
 class MapComponent implements OnInit, AfterViewChecked, AfterViewInit {
   final Firebase firebase;
   final Geo geo;
+  final Noaa noaa;
   final Logger log = new Logger('MapComponent');
-
 
   /// Determines whether the map should be in a display or add state.
   bool addingLocation = false;
@@ -30,7 +30,7 @@ class MapComponent implements OnInit, AfterViewChecked, AfterViewInit {
   @ViewChild('map')
   ElementRef mapReference;
 
-  MapComponent(this.firebase, this.geo);
+  MapComponent(this.firebase, this.geo, this.noaa);
 
   ngAfterViewChecked() {
     // Refresh the map since the tab height changed.
@@ -41,17 +41,22 @@ class MapComponent implements OnInit, AfterViewChecked, AfterViewInit {
     log.info('initializing Google Maps.');
     final mapOptions = new MapOptions()
       ..zoom = 8
-      ..center = new LatLng(-34.397, 150.644);
+      ..center = new LatLng(35.272491, -120.7054055);
 
     map = new GMap(this.mapReference.nativeElement, mapOptions);
 
+    map.onDragend.listen((_) async {
+      Map data = await noaa.getStations(map.bounds);
+      List<Map> stations = data['results'];
+      stations.forEach(print);
+    });
 
     map.onClick.listen((MouseEvent event) {
       // Ideally what happens here is that we populate the current bounds
       // with all wind sensors, not just the user selected ones (but
       // distinguish among the two) then let the user pick one
       // to add.
-      if(addingLocation) {
+      if (addingLocation) {
         log.info('coordinates: ${event.latLng}');
         addingLocation = false;
       }
@@ -62,7 +67,5 @@ class MapComponent implements OnInit, AfterViewChecked, AfterViewInit {
 //    geo.currentLocation.then((LatLng center) => map.center = center);
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }
