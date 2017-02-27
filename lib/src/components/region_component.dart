@@ -54,10 +54,14 @@ class RegionComponent implements OnInit {
     firebase.updateRegion(id, region);
   }
 
-  get addingLocation => mapComponent.addingLocation;
-  set addingLocation(flag) => mapComponent.addingLocation = flag;
-
-  toggleAddingLocation() => addingLocation = !addingLocation;
+  toggleAddMode() {
+    if(mapComponent.isAddModeEnabled) {
+      mapComponent.endAddMode();
+    }
+    else {
+      mapComponent.triggerAddMode();
+    }
+  }
 
   tabChanged(TabChangeEvent event) =>
       inMapTab = event.newIndex == _mapTab;

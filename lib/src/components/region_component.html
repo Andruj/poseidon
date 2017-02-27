@@ -49,18 +49,18 @@
             id="add_location"
             class="white-text lighten-2 scale-transition"
 
-            [class.green]="!addingLocation"
-            [class.grey]="addingLocation"
-            [class.darken-1]="addingLocation"
+            [class.green]="!mapComponent.isAddModeEnabled"
+            [class.grey]="mapComponent.isAddModeEnabled"
+            [class.darken-1]="mapComponent.isAddModeEnabled"
 
             [class.scale-in]="inMapTab"
             [class.scale-out]="!inMapTab"
 
-            (click)="toggleAddingLocation()"
+            (click)="toggleAddMode()"
             mini raised>
 
-        <glyph *ngIf="!addingLocation" icon="add_location"></glyph>
-        <glyph *ngIf="addingLocation" icon="clear"></glyph>
+        <glyph *ngIf="!mapComponent.isAddModeEnabled" icon="add_location"></glyph>
+        <glyph *ngIf="mapComponent.isAddModeEnabled" icon="clear"></glyph>
 
     </material-fab>
 
