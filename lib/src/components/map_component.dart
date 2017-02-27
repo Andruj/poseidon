@@ -67,12 +67,20 @@ class MapComponent implements OnInit, AfterViewChecked, AfterViewInit {
     log.info('starting add mode for map.');
     _addingLocation = true;
 
+    map.options = new MapOptions()
+      ..styles = map_config.addModeStyles;
 
+    _resetMarkers(null);
   }
 
   endAddMode() {
     log.info('ending add mode for map.');
     _addingLocation = false;
+
+    map.options = new MapOptions()..styles = [];
+
+    _clearMap();
+    _displaySelectedStations();
   }
 
   get isAddModeEnabled => _addingLocation;
