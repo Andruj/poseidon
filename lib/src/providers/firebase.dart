@@ -82,26 +82,34 @@ class Firebase {
       _regionsNode.child(id).update(Region.toMap(region));
 
   deleteRegionById(String id) => _regionsNode.child(id).remove();
+
+  addStation(String id, Map station) => _regionsNode.child(id).child('stations').push(station);
 }
 
 class Region {
   String name;
+  Map<String, Map> stations;
 
   static Region fromMap(Map json) {
-    return new Region(json['name']);
+    return new Region(
+        json['name'], json['stations'] ?? {});
   }
 
   static Map toMap(Region region) {
-    return {'name': region.name};
+    return {
+      'name': region.name,
+      'stations': region.stations
+    };
   }
 
-  Region(this.name);
+  Region(this.name, this.stations);
 
   @override
   String toString() {
     return '''
 
 [Region
-    (name: $name)]''';
+    (name: $name)
+    (stations: $stations]''';
   }
 }
