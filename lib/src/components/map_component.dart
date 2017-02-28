@@ -38,7 +38,7 @@ class MapComponent implements AfterViewInit, OnChanges {
   /// If the data has changed, redraw the map. If we are still in edit mode,
   /// it means the edit went through, so end the edit mode.
   ngOnChanges(_) {
-    log.info('refreshing the map.');
+    log.info('onChanges: triggered.');
     if (isAddModeEnabled) {
       endAddMode();
     }
