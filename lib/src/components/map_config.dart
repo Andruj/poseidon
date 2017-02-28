@@ -2,6 +2,7 @@ import 'package:google_maps/google_maps.dart';
 
 final MapOptions options = new MapOptions()
   ..zoom = 8
+  ..center = new LatLng(35.2828, -120.6596)
   ..styles = [];
 
 final MapOptions blankOptions = new MapOptions()

@@ -33,7 +33,7 @@ class RegionsComponent implements OnInit, OnDestroy {
   addRegion() {
     if(newRegionName.isNotEmpty) {
       log.info('onClick: setting up new region.');
-      firebase.addRegion(new Region(newRegionName));
+      firebase.addRegion(new Region(newRegionName, {}, 'high_wind'));
 
       // Close the dialog after adding a region.
       resetDialog();
