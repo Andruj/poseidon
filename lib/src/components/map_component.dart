@@ -21,7 +21,6 @@ class MapComponent implements AfterViewInit, OnChanges {
 
   /// Determines whether the map should be in a display or add state.
   bool _addingLocation = false;
-  bool _firstRender = true;
 
   GMap map;
 
