@@ -25,7 +25,7 @@ class RegionsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    log.info("there are ${regions.isNotEmpty ? "" : "no"} regions here.");
+    log.info("there are${regions.isNotEmpty ? "" : " no"} regions here.");
   }
 
   ngOnDestroy() {}

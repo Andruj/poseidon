@@ -33,7 +33,6 @@ class RegionComponent implements OnInit {
   /// Determines whether the 'add location' FAB is visible to the user.
   bool inMapTab = false;
 
-
   bool showDeleteDialog = false;
 
   RegionComponent(this.firebase);
@@ -55,14 +54,20 @@ class RegionComponent implements OnInit {
   }
 
   toggleAddMode() {
-    if(mapComponent.isAddModeEnabled) {
+    if (mapComponent.isAddModeEnabled) {
       mapComponent.endAddMode();
-    }
-    else {
+    } else {
       mapComponent.triggerAddMode();
     }
   }
 
-  tabChanged(TabChangeEvent event) =>
-      inMapTab = event.newIndex == _mapTab;
+  tabChanged(TabChangeEvent event) {
+    inMapTab = event.newIndex == _mapTab;
+
+    // Hack. We wait for the DOM to load the tab then resize the map.
+    if (inMapTab) {
+      new Future.delayed(
+          const Duration(milliseconds: 250), mapComponent.resize);
+    }
+  }
 }

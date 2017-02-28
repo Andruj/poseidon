@@ -1,5 +1,17 @@
 import 'package:google_maps/google_maps.dart';
 
+final MapOptions options = new MapOptions()
+  ..zoom = 8
+  ..styles = [];
+
+final MapOptions blankOptions = new MapOptions()
+  ..styles = []
+  ..disableDefaultUI = false;
+
+final MapOptions editOptions = new MapOptions()
+  ..styles = addModeStyles
+  ..disableDefaultUI = true;
+
 List<MapTypeStyle> addModeStyles = [
   new MapTypeStyle()
     ..elementType = MapTypeStyleElementType.GEOMETRY

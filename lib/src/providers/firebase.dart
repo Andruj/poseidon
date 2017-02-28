@@ -93,16 +93,20 @@ class Firebase {
 class Region {
   String name;
   Map<String, Map> stations;
+  String wind;
+
+  final HIGH_WIND = "high_wind";
+  final LOW_WIND = "low_wind";
 
   static Region fromMap(Map json) {
-    return new Region(json['name'], json['stations'] ?? {});
+    return new Region(json['name'], json['stations'] ?? {}, json['wind'] ?? "high_wind");
   }
 
   static Map toMap(Region region) {
-    return {'name': region.name, 'stations': region.stations};
+    return {'name': region.name, 'stations': region.stations, 'wind': region.wind};
   }
 
-  Region(this.name, this.stations);
+  Region(this.name, this.stations, this.wind);
 
   @override
   String toString() {
@@ -110,6 +114,7 @@ class Region {
 
 [Region
     (name: $name)
-    (stations: $stations]''';
+    (wind: $wind)
+    (stations: $stations)]''';
   }
 }

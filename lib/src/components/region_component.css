@@ -38,3 +38,7 @@ map, calendar {
     margin-left: 4px;
     margin-right: 4px;
 }
+
+.region-settings {
+    width: 100%;
+}

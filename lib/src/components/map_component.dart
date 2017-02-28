@@ -10,20 +10,18 @@ part of components;
   directives: const [materialDirectives, appDirectives],
   providers: const [materialProviders, appProviders],
 )
-class MapComponent implements AfterViewChecked, AfterViewInit, OnChanges {
+class MapComponent implements AfterViewInit, OnChanges {
+  final Logger log = new Logger('MapComponent');
+
   final Firebase firebase;
   final Geo geo;
   final Noaa noaa;
-  final Logger log = new Logger('MapComponent');
 
   final List<Marker> markers = [];
 
-  final options = new MapOptions()
-    ..zoom = 8
-    ..center = new LatLng(35.272491, -120.7054055);
-
   /// Determines whether the map should be in a display or add state.
   bool _addingLocation = false;
+  bool _firstRender = true;
 
   GMap map;
 
@@ -41,7 +39,8 @@ class MapComponent implements AfterViewChecked, AfterViewInit, OnChanges {
   /// If the data has changed, redraw the map. If we are still in edit mode,
   /// it means the edit went through, so end the edit mode.
   ngOnChanges(_) {
-    if(isAddModeEnabled) {
+    log.info('refreshing the map.');
+    if (isAddModeEnabled) {
       endAddMode();
     }
 
@@ -49,14 +48,8 @@ class MapComponent implements AfterViewChecked, AfterViewInit, OnChanges {
     _displaySelectedStations();
   }
 
-  ngAfterViewChecked() {
-    // Refresh the map since the tab height changed.
-    event.trigger(map, 'resize', null);
-  }
-
   ngAfterViewInit() {
-    log.info('initializing Google Maps.');
-    map = new GMap(this.mapReference.nativeElement, options);
+    map = new GMap(this.mapReference.nativeElement, map_config.options);
 
     map.onDragend.listen(_resetMarkers);
 
@@ -65,26 +58,28 @@ class MapComponent implements AfterViewChecked, AfterViewInit, OnChanges {
 
     // Grab the current location if available.
     // Breaks in Dartium.
-//    geo.currentLocation.then((LatLng center) => map.center = center);
   }
 
   triggerAddMode() {
-    log.info('entering edit mode.');
     _addingLocation = true;
-
-    map.options = new MapOptions()..styles = map_config.addModeStyles;
+    // Set the map to edit mode.
+    map.options = map_config.editOptions;
     _clearMap();
     _resetMarkers(null);
   }
 
   endAddMode() {
-    log.info('ending edit mode for map.');
     _addingLocation = false;
-
-    map.options = new MapOptions()..styles = [];
+    // Reset the options (styles) for the map.
+    map.options = map_config.blankOptions;
 
     _clearMap();
     _displaySelectedStations();
+  }
+
+  resize() {
+    event.trigger(map, 'resize', null);
+    _centerOnMarkers();
   }
 
   get isAddModeEnabled => _addingLocation;
@@ -93,18 +88,12 @@ class MapComponent implements AfterViewChecked, AfterViewInit, OnChanges {
   _resetMarkers(MouseEvent event) async {
     if (_addingLocation) {
       Map data = await noaa.getStations(map.bounds);
-      _clearMap();
-      data['results'].forEach(_initializeStation);
+      // If edit mode is turned off midway through the request, don't render.
+      if (_addingLocation) {
+        _clearMap();
+        data['results'].forEach(_initializeStation);
+      }
     }
-  }
-
-  /// Clears the map markers and the markers list.
-  _clearMap() {
-    for (Marker marker in markers) {
-      marker.map = null;
-    }
-
-    markers.clear();
   }
 
   /// Generates a marker for a station from NOAA.
@@ -120,9 +109,7 @@ class MapComponent implements AfterViewChecked, AfterViewInit, OnChanges {
     Marker marker = new Marker(opts);
     marker.onClick.listen((_) {
       if (_addingLocation) {
-        List<String> keys = region.stations.keys
-            .where((key) => region.stations[key]['id'] == station['id'])
-            .toList();
+        List<String> keys = _getStationIds(station);
 
         if (keys.isEmpty) {
           firebase.addStation(id, station);
@@ -135,15 +122,35 @@ class MapComponent implements AfterViewChecked, AfterViewInit, OnChanges {
     markers.add(marker);
   }
 
-  _displaySelectedStations() =>
-    region.stations.values.forEach(_initializeStation);
-
-  _isInRegion(Map station) {
-    List<String> keys = region.stations.keys
-        .where((key) => region.stations[key]['id'] == station['id'])
-        .toList();
-
-    return keys.isNotEmpty;
+  /// Clears the map markers and the markers list.
+  _clearMap() {
+    for (Marker marker in markers) {
+      marker.map = null;
+    }
+    markers.clear();
   }
 
+  _displaySelectedStations() {
+    region.stations.values.forEach(_initializeStation);
+  }
+
+  _getStationIds(station) => region.stations.keys
+      .where((key) => region.stations[key]['id'] == station['id'])
+      .toList();
+
+  _isInRegion(Map station) => _getStationIds(station).isNotEmpty;
+
+  _centerOnMarkers() async {
+    if (markers.isEmpty) {
+      // Broken on Dartium.
+      // map.center = await geo.currentLocation;
+    } else {
+      LatLngBounds computed = new LatLngBounds();
+      markers.map((marker) => marker.position).forEach(computed.extend);
+      map.center = computed.center;
+      map.fitBounds(computed);
+      // Ensure no markers are up against the edge.
+      map.zoom = map.zoom - 1;
+    }
+  }
 }
