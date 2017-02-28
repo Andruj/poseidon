@@ -10,7 +10,7 @@ part of components;
   directives: const [materialDirectives, appDirectives],
   providers: const [materialProviders, appProviders],
 )
-class MapComponent implements OnInit, AfterViewChecked, AfterViewInit {
+class MapComponent implements AfterViewChecked, AfterViewInit, OnChanges {
   final Firebase firebase;
   final Geo geo;
   final Noaa noaa;
@@ -36,18 +36,22 @@ class MapComponent implements OnInit, AfterViewChecked, AfterViewInit {
   @ViewChild('map')
   ElementRef mapReference;
 
-  MapComponent(this.firebase, this.geo, this.noaa);
+  MapComponent(this.firebase, this.geo, this.noaa) {}
 
-  ngOnInit() {}
+  /// If the data has changed, redraw the map. If we are still in edit mode,
+  /// it means the edit went through, so end the edit mode.
+  ngOnChanges(_) {
+    if(isAddModeEnabled) {
+      endAddMode();
+    }
+
+    _clearMap();
+    _displaySelectedStations();
+  }
 
   ngAfterViewChecked() {
     // Refresh the map since the tab height changed.
     event.trigger(map, 'resize', null);
-
-    // If stations were added, then render the stations.
-    if (region.stations.length != markers.length) {
-      region.stations.values.forEach(_initializeStation);
-    }
   }
 
   ngAfterViewInit() {
@@ -56,7 +60,8 @@ class MapComponent implements OnInit, AfterViewChecked, AfterViewInit {
 
     map.onDragend.listen(_resetMarkers);
 
-    region.stations.values.forEach(_initializeStation);
+    _clearMap();
+    _displaySelectedStations();
 
     // Grab the current location if available.
     // Breaks in Dartium.
@@ -64,17 +69,16 @@ class MapComponent implements OnInit, AfterViewChecked, AfterViewInit {
   }
 
   triggerAddMode() {
-    log.info('starting add mode for map.');
+    log.info('entering edit mode.');
     _addingLocation = true;
 
-    map.options = new MapOptions()
-      ..styles = map_config.addModeStyles;
-
+    map.options = new MapOptions()..styles = map_config.addModeStyles;
+    _clearMap();
     _resetMarkers(null);
   }
 
   endAddMode() {
-    log.info('ending add mode for map.');
+    log.info('ending edit mode for map.');
     _addingLocation = false;
 
     map.options = new MapOptions()..styles = [];
@@ -88,9 +92,8 @@ class MapComponent implements OnInit, AfterViewChecked, AfterViewInit {
   /// A callback that resets the markers when the bounds on the map change.
   _resetMarkers(MouseEvent event) async {
     if (_addingLocation) {
-      _clearMap();
-
       Map data = await noaa.getStations(map.bounds);
+      _clearMap();
       data['results'].forEach(_initializeStation);
     }
   }
@@ -109,22 +112,38 @@ class MapComponent implements OnInit, AfterViewChecked, AfterViewInit {
     MarkerOptions opts = new MarkerOptions()
       ..position = new LatLng(station['latitude'], station['longitude'])
       ..map = map
+      ..icon = isAddModeEnabled && _isInRegion(station)
+          ? "/pin_selected.png"
+          : "/pin.png"
       ..title = station['name'];
 
     Marker marker = new Marker(opts);
     marker.onClick.listen((_) {
-      firebase.addStation(id, station);
-      endAddMode();
+      if (_addingLocation) {
+        List<String> keys = region.stations.keys
+            .where((key) => region.stations[key]['id'] == station['id'])
+            .toList();
 
-      _clearMap();
-      _displaySelectedStations();
-
-      print(region.stations);
+        if (keys.isEmpty) {
+          firebase.addStation(id, station);
+        } else {
+          keys.forEach((String key) => firebase.deleteStationById(id, key));
+        }
+      }
     });
 
     markers.add(marker);
   }
 
   _displaySelectedStations() =>
-      region.stations.values.forEach(_initializeStation);
+    region.stations.values.forEach(_initializeStation);
+
+  _isInRegion(Map station) {
+    List<String> keys = region.stations.keys
+        .where((key) => region.stations[key]['id'] == station['id'])
+        .toList();
+
+    return keys.isNotEmpty;
+  }
+
 }

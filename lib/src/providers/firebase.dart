@@ -83,7 +83,11 @@ class Firebase {
 
   deleteRegionById(String id) => _regionsNode.child(id).remove();
 
-  addStation(String id, Map station) => _regionsNode.child(id).child('stations').push(station);
+  addStation(String id, Map station) =>
+      _regionsNode.child(id).child('stations').push(station);
+
+  deleteStationById(String regionId, String stationId) =>
+      _regionsNode.child(regionId).child('stations').child(stationId).remove();
 }
 
 class Region {
@@ -91,15 +95,11 @@ class Region {
   Map<String, Map> stations;
 
   static Region fromMap(Map json) {
-    return new Region(
-        json['name'], json['stations'] ?? {});
+    return new Region(json['name'], json['stations'] ?? {});
   }
 
   static Map toMap(Region region) {
-    return {
-      'name': region.name,
-      'stations': region.stations
-    };
+    return {'name': region.name, 'stations': region.stations};
   }
 
   Region(this.name, this.stations);
