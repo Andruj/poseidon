@@ -36,21 +36,7 @@
         <map [region]="region" [id]="id"></map>
     </material-tab>
     <material-tab class="z-depth-0" label="Details">
-        <div class="row region-settings">
-            <form class="col s12">
-                <div class="row">
-                    <div class="col s6 input-field">
-                        <input [(ngModel)]="region.name" id="name" (keyup)="update()"/>
-                        <label class="active" for="name">Region Name</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col s12">
-                    </div>
-                </div>
-
-            </form>
-        </div>
+        <details-comp [region]="region" [id]="id"></details-comp>
     </material-tab>
 </material-tab-panel>
 

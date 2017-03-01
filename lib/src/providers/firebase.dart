@@ -94,19 +94,23 @@ class Region {
   String name;
   Map<String, Map> stations;
   String wind;
+  String direction;
+
+  final String MAX = "max";
+  final String MIN = "min";
 
   final HIGH_WIND = "high_wind";
   final LOW_WIND = "low_wind";
 
   static Region fromMap(Map json) {
-    return new Region(json['name'], json['stations'] ?? {}, json['wind'] ?? "high_wind");
+    return new Region(json['name'], json['stations'] ?? {}, json['wind'] ?? "high_wind", json['direction'] ?? "max");
   }
 
   static Map toMap(Region region) {
-    return {'name': region.name, 'stations': region.stations, 'wind': region.wind};
+    return {'name': region.name, 'stations': region.stations, 'wind': region.wind, 'direction': region.direction};
   }
 
-  Region(this.name, this.stations, this.wind);
+  Region(this.name, this.stations, this.wind, this.direction);
 
   @override
   String toString() {
@@ -115,6 +119,7 @@ class Region {
 [Region
     (name: $name)
     (wind: $wind)
-    (stations: $stations)]''';
+    (direction: $direction)
+    (stations: ${stations.length})]''';
   }
 }

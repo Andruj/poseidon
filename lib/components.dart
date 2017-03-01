@@ -21,6 +21,7 @@ part 'src/components/regions_component.dart';
 part 'src/components/profile_component.dart';
 part 'src/components/map_component.dart';
 part 'src/components/calendar_component.dart';
+part 'src/components/details_component.dart';
 
 const rootComponent = AppComponent;
 const appDirectives = const [
@@ -32,4 +33,5 @@ const appDirectives = const [
   ProfileComponent,
   MapComponent,
   CalendarComponent,
+  DetailsComponent,
 ];
