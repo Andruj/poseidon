@@ -111,10 +111,10 @@ class MapComponent implements AfterViewInit, OnChanges {
     final marker = new Marker(options)
       ..onClick.listen((_) {
         if (_addingLocation) {
-          String key = region.getLocationKey(location);
+          String locationId = region.getLocationId(location);
 
-          if (key.isNotEmpty) {
-            firebase.deleteStationById(id, key);
+          if (locationId.isNotEmpty) {
+            firebase.deleteStationById(id, locationId);
           }
         }
       });

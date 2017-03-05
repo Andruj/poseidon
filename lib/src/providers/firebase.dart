@@ -86,7 +86,7 @@ class Firebase {
   addLocation(String id, Location location) => _regionsNode
       .child(id)
       .child(Region.locationsKey)
-      .push(Location.toMap(location));
+      .push(location.toMap());
 
   deleteStationById(String regionId, String stationId) => _regionsNode
       .child(regionId)

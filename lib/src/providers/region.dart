@@ -9,8 +9,8 @@ class Region {
   Region.fromMap(Map json) : this.name = json['name'] {
     Map<String, Map> data = json[locationsKey] ?? {};
 
-    this.locations =
-        new Map.fromIterables(data.keys, data.values.map(Location.fromMap));
+    this.locations = new Map.fromIterables(
+        data.keys, data.values.map((json) => new Location.fromMap(json)));
   }
 
   Map toMap() {
@@ -23,7 +23,7 @@ class Region {
 
   Region(this.name, this.locations);
 
-  String getLocationKey(Location location) =>
+  String getLocationId(Location location) =>
       locations.keys.firstWhere((key) => locations[key] == location);
 
   @override

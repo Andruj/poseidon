@@ -10,14 +10,12 @@ class Location {
   get lat => position.lat;
   get lng => position.lng;
 
-  static Location fromMap(Map json) {
-    return new Location(json['lat'], json['lng']);
-  }
+  Location.fromMap(Map json) : position = new LatLng(json['lat'], json['lng']);
 
-  static Map toMap(Location location) {
+  Map toMap() {
     return {
-      'lat': location.lat,
-      'lng': location.lng,
+      'lat': lat,
+      'lng': lng,
     };
   }
 
