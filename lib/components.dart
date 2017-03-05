@@ -8,6 +8,8 @@ import 'package:angular2/router.dart';
 import 'package:angular2_components/angular2_components.dart';
 import 'package:firebase/firebase.dart';
 import 'package:logging/logging.dart';
+import 'package:quiver/iterables.dart' as quiver;
+
 import 'package:google_maps/google_maps.dart';
 
 import 'package:poseidon/providers.dart' as app;

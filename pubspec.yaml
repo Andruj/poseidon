@@ -9,6 +9,7 @@ dependencies:
   google_maps: ">=3.0.0 <4.0.0"
   firebase: ^3.0.0
   logging: any
+  quiver: any
 dev_dependencies:
   browser: ^0.10.0
   dart_to_js_script_rewriter: ^1.0.1

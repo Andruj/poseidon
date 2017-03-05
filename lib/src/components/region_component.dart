@@ -17,8 +17,9 @@ class TabIndex {
   providers: const [materialProviders, app.providers],
 )
 class RegionComponent {
-  final app.Firebase firebase;
   final Logger log = new Logger('RegionComponent');
+  final app.Firebase firebase;
+  final app.Weather weather;
 
   @ViewChild(MapComponent)
   MapComponent mapComponent;
@@ -42,7 +43,7 @@ class RegionComponent {
   /// Delay in milliseconds to resize the map after changing to the tab.
   static const int _delay = 250;
 
-  RegionComponent(this.firebase);
+  RegionComponent(this.firebase, this.weather);
 
   /// Deletes a region from Firebase.
   delete() {

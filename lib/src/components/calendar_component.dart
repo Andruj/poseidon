@@ -11,8 +11,9 @@ part of components;
   providers: const [materialProviders, app.providers],
 )
 class CalendarComponent implements OnInit {
-  final app.Firebase firebase;
   final Logger log = new Logger('CalendarComponent');
+  final app.Firebase firebase;
+  final app.Weather weather;
 
   @Input()
   app.Region region;
@@ -20,8 +21,24 @@ class CalendarComponent implements OnInit {
   @Input()
   String id;
 
-  CalendarComponent(this.firebase);
+  List<app.Forecast> forecasts;
 
-  ngOnInit() {}
+  /// The zipped snapshots from each forecast.
+  List<app.Snapshot> aggregates;
 
+  CalendarComponent(this.firebase, this.weather);
+
+  ngOnInit() {
+    (() async {
+      forecasts =
+          await Future.wait(region.locations.values.map(weather.getForecast));
+
+      log.info('received ${forecasts.length} forecasts.');
+
+      aggregates = quiver
+          .zip(forecasts.map((forecast) => forecast.data))
+          .map((snaps) => new app.Snapshot.fromSnapshots(snaps as List<app.Snapshot>));
+
+    })();
+  }
 }

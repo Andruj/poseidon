@@ -14,7 +14,7 @@ class MapComponent implements AfterViewInit, OnChanges {
   final Logger log = new Logger('MapComponent');
   final app.Firebase firebase;
   final app.Geo geo;
-  final app.DarkSky sky;
+  final app.Weather sky;
 
   @ViewChild('map')
   ElementRef mapReference;
