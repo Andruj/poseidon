@@ -8,14 +8,14 @@ part of components;
   styleUrls: const ['src/components/calendar_component.css'],
   templateUrl: 'src/components/calendar_component.html',
   directives: const [materialDirectives, appDirectives],
-  providers: const [materialProviders, appProviders],
+  providers: const [materialProviders, app.providers],
 )
 class CalendarComponent implements OnInit {
-  final Firebase firebase;
+  final app.Firebase firebase;
   final Logger log = new Logger('CalendarComponent');
 
   @Input()
-  Region region;
+  app.Region region;
 
   @Input()
   String id;

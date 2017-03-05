@@ -25,12 +25,12 @@ part of components;
   providers: const [
     ROUTER_PROVIDERS,
     materialProviders,
-    appSingletons,
-    appProviders
+    app.singletons,
+    app.providers
   ],
 )
 class AppComponent {
-  final Firebase firebase;
+  final app.Firebase firebase;
   final Router router;
   final Logger log = new Logger('AppComponent');
 

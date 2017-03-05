@@ -8,14 +8,14 @@ part of components;
   styleUrls: const ['src/components/details_component.css'],
   templateUrl: 'src/components/details_component.html',
   directives: const [materialDirectives, appDirectives],
-  providers: const [materialProviders, appProviders],
+  providers: const [materialProviders, app.providers],
 )
 class DetailsComponent implements OnInit {
-  final Firebase firebase;
+  final app.Firebase firebase;
   final Logger log = new Logger('DetailsComponent');
 
   @Input()
-  Region region;
+  app.Region region;
 
   @Input()
   String id;

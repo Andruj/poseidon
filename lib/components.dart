@@ -10,7 +10,7 @@ import 'package:firebase/firebase.dart';
 import 'package:logging/logging.dart';
 import 'package:google_maps/google_maps.dart';
 
-import 'package:poseidon/providers.dart';
+import 'package:poseidon/providers.dart' as app;
 import 'package:poseidon/src/components/map_config.dart' as map_config;
 
 part 'src/components/app_component.dart';

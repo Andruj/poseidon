@@ -20,10 +20,10 @@ part of components;
   styleUrls: const ['src/components/dashboard_component.css'],
   templateUrl: 'src/components/dashboard_component.html',
   directives: const [ROUTER_DIRECTIVES, materialDirectives, appDirectives],
-  providers: const [materialProviders, appProviders],
+  providers: const [materialProviders, app.providers],
 )
 class DashboardComponent implements OnInit {
-  final Firebase firebase;
+  final app.Firebase firebase;
   final Router router;
   final Logger log = new Logger('DashboardComponent');
 

@@ -8,10 +8,10 @@ part of components;
   styleUrls: const ['src/components/login_component.css'],
   templateUrl: 'src/components/login_component.html',
   directives: const [materialDirectives, appDirectives, NgClass],
-  providers: const [materialProviders, appProviders],
+  providers: const [materialProviders, app.providers],
 )
 class LoginComponent {
-  final Firebase firebase;
+  final app.Firebase firebase;
   final Logger log = new Logger('LoginComponent');
 
   LoginComponent(this.firebase);

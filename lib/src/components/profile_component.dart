@@ -7,7 +7,7 @@ part of components;
   selector: 'profile',
   templateUrl: 'src/components/profile_component.html',
   directives: const [materialDirectives, appDirectives],
-  providers: const [materialProviders, appProviders],
+  providers: const [materialProviders, app.providers],
 )
 class ProfileComponent implements OnInit {
   final Logger log = new Logger('ProfileComponent');

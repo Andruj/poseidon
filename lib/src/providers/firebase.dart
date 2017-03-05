@@ -50,10 +50,10 @@ class Firebase {
           regions.clear();
 
           if (event.snapshot.exists()) {
-            Map data = event.snapshot.val();
+            Map<String, Map> data = event.snapshot.val();
 
-            regions.addAll(new Map.fromIterables(
-                data.keys, data.values.map(Region.fromMap)));
+            regions.addAll(new Map.fromIterables(data.keys,
+                data.values.map((json) => new Region.fromMap(json))));
 
             log.info('acquired ${regions.length} regions.');
           }
@@ -76,50 +76,21 @@ class Firebase {
 
   get hasUser => user != null;
 
-  addRegion(Region region) => _regionsNode.push(Region.toMap(region));
+  addRegion(Region region) => _regionsNode.push(region.toMap());
 
   updateRegion(String id, Region region) =>
-      _regionsNode.child(id).update(Region.toMap(region));
+      _regionsNode.child(id).update(region.toMap());
 
   deleteRegionById(String id) => _regionsNode.child(id).remove();
 
-  addStation(String id, Map station) =>
-      _regionsNode.child(id).child('stations').push(station);
+  addLocation(String id, Location location) => _regionsNode
+      .child(id)
+      .child(Region.locationsKey)
+      .push(Location.toMap(location));
 
-  deleteStationById(String regionId, String stationId) =>
-      _regionsNode.child(regionId).child('stations').child(stationId).remove();
-}
-
-class Region {
-  String name;
-  Map<String, Map> stations;
-  String wind;
-  String direction;
-
-  final String MAX = "max";
-  final String MIN = "min";
-
-  final HIGH_WIND = "high_wind";
-  final LOW_WIND = "low_wind";
-
-  static Region fromMap(Map json) {
-    return new Region(json['name'], json['stations'] ?? {}, json['wind'] ?? "high_wind", json['direction'] ?? "max");
-  }
-
-  static Map toMap(Region region) {
-    return {'name': region.name, 'stations': region.stations, 'wind': region.wind, 'direction': region.direction};
-  }
-
-  Region(this.name, this.stations, this.wind, this.direction);
-
-  @override
-  String toString() {
-    return '''
-
-[Region
-    (name: $name)
-    (wind: $wind)
-    (direction: $direction)
-    (stations: ${stations.length})]''';
-  }
+  deleteStationById(String regionId, String stationId) => _regionsNode
+      .child(regionId)
+      .child(Region.locationsKey)
+      .child(stationId)
+      .remove();
 }
