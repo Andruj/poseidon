@@ -17,7 +17,7 @@ class Region {
     return {
       'name': name,
       locationsKey: new Map.fromIterables(
-          locations.keys, locations.values.map(Location.toMap)),
+          locations.keys, locations.values.map((Location l) => l.toMap()))
     };
   }
 

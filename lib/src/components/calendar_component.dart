@@ -10,7 +10,7 @@ part of components;
   directives: const [materialDirectives, appDirectives],
   providers: const [materialProviders, app.providers],
 )
-class CalendarComponent implements OnInit {
+class CalendarComponent implements OnChanges {
   final Logger log = new Logger('CalendarComponent');
   final app.Firebase firebase;
   final app.Weather weather;
@@ -26,20 +26,28 @@ class CalendarComponent implements OnInit {
   /// The zipped snapshots from each forecast.
   List<app.Snapshot> aggregates;
 
+  Map<int, List<app.Snapshot>> days = {};
+
   CalendarComponent(this.firebase, this.weather);
 
-  ngOnInit() {
-    (() async {
-      forecasts =
-          await Future.wait(region.locations.values.map(weather.getForecast));
+  ngOnChanges(_) => _setup();
 
-      log.info('received ${forecasts.length} forecasts.');
+  _setup() async {
+    log.info('onChanges: refreshing snapshots.');
+    days.clear();
 
-      aggregates = quiver
-          .zip(forecasts.map((forecast) => forecast.data))
-          .map((snaps) => new app.Snapshot.fromSnapshots(snaps as List<app.Snapshot>));
+    forecasts =
+        await Future.wait(region.locations.values.map(weather.getForecast));
 
-      log.info(aggregates.first);
-    })();
+    aggregates = quiver.zip(forecasts.map((forecast) => forecast.data)).map(
+        (snaps) => new app.Snapshot.fromSnapshots(snaps as List<app.Snapshot>));
+
+    aggregates.forEach((app.Snapshot s) {
+      if (days.containsKey(s.time.day)) {
+        days[s.time.day].add(s);
+      } else {
+        days[s.time.day] = [s];
+      }
+    });
   }
 }

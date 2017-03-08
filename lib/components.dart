@@ -14,6 +14,7 @@ import 'package:google_maps/google_maps.dart';
 
 import 'package:poseidon/providers.dart' as app;
 import 'package:poseidon/src/components/map_config.dart' as map_config;
+import 'package:poseidon/pipes.dart';
 
 part 'src/components/app_component.dart';
 part 'src/components/login_component.dart';
@@ -24,6 +25,7 @@ part 'src/components/profile_component.dart';
 part 'src/components/map_component.dart';
 part 'src/components/calendar_component.dart';
 part 'src/components/details_component.dart';
+part 'src/components/snapshot_component.dart';
 
 const rootComponent = AppComponent;
 const appDirectives = const [
@@ -35,5 +37,6 @@ const appDirectives = const [
   ProfileComponent,
   MapComponent,
   CalendarComponent,
+  SnapshotComponent,
   DetailsComponent,
 ];
