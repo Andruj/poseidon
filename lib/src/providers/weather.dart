@@ -63,19 +63,11 @@ class Snapshot {
   Snapshot.fromSnapshots(List<Snapshot> snapshots)
       : _isCombined = true,
         time = snapshots.first.time,
-        temp =
-            snapshots.map((snap) => snap.temp).reduce(_sum) / snapshots.length,
-        humidity = snapshots.map((snap) => snap.humidity).reduce(_sum) /
-            snapshots.length,
-        clouds = snapshots.map((snap) => snap.clouds).reduce(_sum) /
-            snapshots.length,
-        wind =
-            snapshots.map((snap) => snap.wind).reduce(_sum) / snapshots.length,
-        direction = snapshots.map((snap) => snap.direction).reduce(_sum) /
-            snapshots.length;
-
-
-  static _sum(a, b) => a + b;
+        temp = utils.avg(snapshots, (Snapshot s) => s.temp),
+        humidity = utils.avg(snapshots, (Snapshot s) => s.humidity).round(),
+        clouds = utils.avg(snapshots, (Snapshot s) => s.clouds).round(),
+        wind = utils.avg(snapshots, (Snapshot s) => s.wind),
+        direction = utils.avg(snapshots, (Snapshot s) => s.direction);
 
   get isCombined => _isCombined;
 
@@ -85,8 +77,8 @@ class Snapshot {
 
 [Snapshot
     (isCombined: $isCombined)
-    (time: $time)
-    (temp: $temp celsius)
+    (time: ${time.toLocal()})
+    (temp: $temp kelvin)
     (humidity: $humidity%)
     (clouds: $clouds%)
     (wind: $wind m/s)

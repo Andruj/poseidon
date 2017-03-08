@@ -39,6 +39,7 @@ class CalendarComponent implements OnInit {
           .zip(forecasts.map((forecast) => forecast.data))
           .map((snaps) => new app.Snapshot.fromSnapshots(snaps as List<app.Snapshot>));
 
+      log.info(aggregates.first);
     })();
   }
 }

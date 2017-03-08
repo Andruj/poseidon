@@ -9,10 +9,11 @@ import 'package:firebase/firebase.dart';
 import 'package:logging/logging.dart';
 import 'package:google_maps/google_maps.dart';
 
+import 'package:poseidon/utils.dart' as utils;
+
 part 'package:poseidon/src/providers/firebase.dart';
 part 'package:poseidon/src/providers/geo.dart';
 part 'package:poseidon/src/providers/weather.dart';
-
 part 'package:poseidon/src/providers/region.dart';
 part 'package:poseidon/src/providers/location.dart';
 
