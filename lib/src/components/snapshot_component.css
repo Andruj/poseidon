@@ -1,0 +1,33 @@
+.card-panel {
+    border: 1px solid #FAFAFA;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    height: 100px;
+}
+
+.time {
+    position: absolute;
+    top: -2px;
+    left: 0;
+    padding: 5px;
+}
+
+.wind {
+    font-size: 1.5em;
+    position: absolute;
+    top: -5px;
+    right: 1px;
+    padding: 5px;
+}
+
+.wind-overlay {
+    background: rgba(0,0,0,0.2);
+    border-top: 2px solid #999;
+    height: 50%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 0;
+}

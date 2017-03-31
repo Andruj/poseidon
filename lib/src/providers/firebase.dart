@@ -86,6 +86,12 @@ class Firebase {
   addLocation(String id, Location location) =>
       _regionsNode.child(id).child(Region.locationsKey).push(location.toMap());
 
+  addWatcher(String id, DateTime time) =>
+      _regionsNode.child(id).child('watchlist').push(time.toIso8601String());
+
+  deleteWatcherById(String regionId, String id) =>
+      _regionsNode.child(regionId).child('watchlist').child(id).remove();
+
   deleteStationById(String regionId, String stationId) => _regionsNode
       .child(regionId)
       .child(Region.locationsKey)

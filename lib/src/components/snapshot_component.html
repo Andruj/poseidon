@@ -1,7 +1,16 @@
-<div class="card-panel grey lighten-3">
-        <span class="grey-text text-darken-3">
-                {{snapshot.time.hour}}
+<div class="card-panel grey lighten-3 z-depth-0"
+        [class.darken-3]="snapshot.watching"
+        [class.white-text]="snapshot.watching"
+        [class.watching]="snapshot.watching"
+        (click)="select()">
+        <div class="wind-overlay" #windOverlay>
+
+        </div>
+        <span class="time grey-text"
+                [class.text-darken-1]="!snapshot.watching"
+                [class.text-lighten-1]="snapshot.watching">
+                {{snapshot.time.hour | hour}}
         </span>
-        <br/>
-        <span>{{snapshot.wind | units:'mph'}}</span>
+        <span class="wind">{{snapshot.wind | units:'mph'}}</span>
+
 </div>

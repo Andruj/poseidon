@@ -50,7 +50,8 @@ class Snapshot {
   final int clouds;
   final num wind;
   final num direction;
-  bool _isCombined = false;
+  bool _combined = false;
+  bool watching = false;
 
   Snapshot.fromMap(Map json)
       : time = new DateTime.fromMillisecondsSinceEpoch(json['dt'] * 1000),
@@ -61,7 +62,7 @@ class Snapshot {
         direction = json['wind']['deg'];
 
   Snapshot.fromSnapshots(List<Snapshot> snapshots)
-      : _isCombined = true,
+      : _combined = true,
         time = snapshots.first.time,
         temp = utils.avg(snapshots, (Snapshot s) => s.temp),
         humidity = utils.avg(snapshots, (Snapshot s) => s.humidity).round(),
@@ -69,14 +70,16 @@ class Snapshot {
         wind = utils.avg(snapshots, (Snapshot s) => s.wind),
         direction = utils.avg(snapshots, (Snapshot s) => s.direction);
 
-  get isCombined => _isCombined;
+  get combined => _combined;
+
 
   @override
   String toString() {
     return '''
 
 [Snapshot
-    (isCombined: $isCombined)
+    (combined: $combined)
+    (watching: $watching)
     (time: ${time.toLocal()})
     (temp: $temp kelvin)
     (humidity: $humidity%)

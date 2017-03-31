@@ -4,7 +4,11 @@
     </div>
     <div class="row">
         <div class="cell" *ngFor="#snapshot of days[day]">
-            <snapshot [snapshot]="snapshot"></snapshot>
+            <snapshot (select)="select(snapshot)"
+                      [snapshot]="snapshot"
+                      [ceiling]="ceiling"
+                      [regionId]="id"
+                      [region]="region"></snapshot>
         </div>
     </div>
 </div>

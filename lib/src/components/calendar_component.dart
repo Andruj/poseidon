@@ -21,6 +21,8 @@ class CalendarComponent implements OnChanges {
   @Input()
   String id;
 
+  app.Snapshot ceiling;
+
   List<app.Forecast> forecasts;
 
   /// The zipped snapshots from each forecast.
@@ -30,10 +32,29 @@ class CalendarComponent implements OnChanges {
 
   CalendarComponent(this.firebase, this.weather);
 
+  select(app.Snapshot snapshot) {
+    log.info(snapshot);
+    if (snapshot.watching) {
+      firebase.addWatcher(id, snapshot.time);
+    } else {
+      region.watchlist.remove(region.watchlist.keys
+          .firstWhere((k) => region.watchlist[k] == snapshot.time));
+
+      update();
+    }
+  }
+
+  /// Updates the region on firebase.
+  update() {
+    log.info('updating $id to $region');
+    firebase.updateRegion(id, region);
+  }
+
   ngOnChanges(_) => _setup();
 
   _setup() async {
     log.info('onChanges: refreshing snapshots.');
+    log.info(region);
     days.clear();
 
     forecasts =
@@ -41,6 +62,8 @@ class CalendarComponent implements OnChanges {
 
     aggregates = quiver.zip(forecasts.map((forecast) => forecast.data)).map(
         (snaps) => new app.Snapshot.fromSnapshots(snaps as List<app.Snapshot>));
+
+    ceiling = aggregates.reduce((a, b) => a.wind > b.wind ? a : b);
 
     aggregates.forEach((app.Snapshot s) {
       if (days.containsKey(s.time.day)) {
