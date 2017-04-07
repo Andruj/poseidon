@@ -30,10 +30,10 @@
 
 <material-tab-panel (tabChange)="tabChanged($event)" class="negative-margin">
     <material-tab class="z-depth-0 overflow-y" label="Calendar">
-        <calendar [region]="region" [id]="id"></calendar>
+        <calendar [watchlist]="region.watchlist" [locations]="region.locations" [id]="id"></calendar>
     </material-tab>
     <material-tab class="z-depth-0" label="Map">
-        <map [region]="region" [id]="id"></map>
+        <map [locations]="region.locations" [id]="id"></map>
     </material-tab>
     <material-tab class="z-depth-0" label="Details">
         <details-comp [region]="region" [id]="id"></details-comp>
@@ -41,6 +41,19 @@
 </material-tab-panel>
 
 <div class="buttons">
+    <material-fab
+            id="center_location"
+            class="white-text teal lighten-2 scale-transition"
+
+            [class.scale-in]="inMapTab"
+            [class.scale-out]="!inMapTab"
+
+            (click)="center()"
+            mini raised>
+
+        <glyph icon="my_location"></glyph>
+    </material-fab>
+
     <material-fab
             id="add_location"
             class="white-text lighten-2 scale-transition"

@@ -31,7 +31,7 @@ class RegionsComponent implements OnInit {
   addRegion() {
     if (newRegionName.isNotEmpty) {
       log.info('onClick: setting up new region.');
-      firebase.addRegion(new app.Region(newRegionName, {}));
+      firebase.addRegion(new app.Region(newRegionName));
 
       // Close the dialog after adding a region.
       resetDialog();

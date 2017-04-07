@@ -4,12 +4,11 @@ class Region {
   static const locationsKey = "locations";
 
   String name;
-  Map<String, Location> locations;
-  Map<String, DateTime> watchlist;
+  Map<String, Location> locations = {};
+  Map<String, DateTime> watchlist = {};
 
   Region.fromMap(Map json) : this.name = json['name'] {
     Map<String, Map> _locations = json[locationsKey] ?? {};
-
     Map<String, String> _watchlist = json['watchlist'] ?? {};
 
     this.locations = new Map.fromIterables(
@@ -27,7 +26,7 @@ class Region {
     };
   }
 
-  Region(this.name, this.locations);
+  Region(this.name);
 
   String getLocationId(Location location) =>
       locations.keys.firstWhere((key) => locations[key] == location);

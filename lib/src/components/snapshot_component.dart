@@ -14,7 +14,6 @@ part of components;
 class SnapshotComponent implements OnChanges {
   final Logger log = new Logger('SnapshotComponent');
   final app.Firebase firebase;
-  String id;
 
   @ViewChild('windOverlay')
   ElementRef overlayReference;
@@ -26,49 +25,38 @@ class SnapshotComponent implements OnChanges {
   String regionId;
 
   @Input()
+  bool watching = false;
+
+  @Input()
+  String watchlistId;
+
+  @Input()
   app.Snapshot ceiling;
 
   @Input()
   app.Snapshot snapshot;
-
-  @Input()
-  app.Region region;
 
 
   SnapshotComponent(this.firebase) {
   }
 
   ngOnChanges(_) {
-    if(region.watchlist.containsValue(snapshot.time)) {
-      snapshot.watching = true;
-
-      id = region.watchlist.keys.firstWhere((k) {
-        return region.watchlist[k] == snapshot.time;
-      });
-    }
+    log.info('onChanges.');
 
     // Calculate ratio of the snapshot's wind with the max windspeed
     // for the calendar, cap to a max of 70%.
     num height = (snapshot.wind / ceiling.wind) * 70;
 
     overlayReference.nativeElement.style.height = '$height%';
-
-    if(id != null) {
-      log.info('database id: $id.');
-    }
-
   }
 
   select() {
-    snapshot.watching = !snapshot.watching;
-
-    if(snapshot.watching) {
+    if(!watching) {
       firebase.addWatcher(regionId, snapshot.time);
     } else {
       log.info('Deleting watchlist element.');
-      firebase.deleteWatcherById(regionId, id);
+      firebase.deleteWatcherById(regionId, watchlistId);
     }
-    onSelect.emit(null);
   }
 
 

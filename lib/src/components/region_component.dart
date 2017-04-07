@@ -60,6 +60,10 @@ class RegionComponent {
     firebase.updateRegion(id, region);
   }
 
+  center() {
+    mapComponent.centerOnMarkers();
+  }
+
   toggleAddMode() {
     if (mapComponent.isAddModeEnabled) {
       mapComponent.endAddMode();

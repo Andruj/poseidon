@@ -4,11 +4,12 @@
     </div>
     <div class="row">
         <div class="cell" *ngFor="#snapshot of days[day]">
-            <snapshot (select)="select(snapshot)"
+            <snapshot
+                      [watching]="isWatching(snapshot)"
+                      [watchlistId]="getWatchlistKey(snapshot)"
                       [snapshot]="snapshot"
                       [ceiling]="ceiling"
-                      [regionId]="id"
-                      [region]="region"></snapshot>
+                      [regionId]="id"></snapshot>
         </div>
     </div>
 </div>

@@ -20,7 +20,7 @@ class MapComponent implements AfterViewInit, OnChanges {
   ElementRef mapReference;
 
   @Input()
-  app.Region region;
+  Map locations;
 
   @Input()
   String id;
@@ -30,6 +30,7 @@ class MapComponent implements AfterViewInit, OnChanges {
 
   /// Determines whether the map should be in a display or add state.
   bool _addingLocation = false;
+  bool _shouldResize = true;
 
   /// The Google Map for the component.
   GMap map;
@@ -39,7 +40,7 @@ class MapComponent implements AfterViewInit, OnChanges {
   /// If the data has changed, redraw the map. If we are still in edit mode,
   /// it means the edit went through, so end the edit mode.
   ngOnChanges(_) {
-    log.info('onChanges: triggered.');
+    log.info('onChanges.');
     if (isAddModeEnabled) {
       endAddMode();
     }
@@ -49,6 +50,7 @@ class MapComponent implements AfterViewInit, OnChanges {
   }
 
   ngAfterViewInit() {
+    log.info('afterViewInit.');
     map = new GMap(this.mapReference.nativeElement, map_config.options);
     map.onClick.listen(_addLocation);
 
@@ -63,22 +65,30 @@ class MapComponent implements AfterViewInit, OnChanges {
     _addingLocation = true;
     // Set the map to edit mode.
     map.options = map_config.editOptions;
-    _clearMap();
-    _displayLocations();
+    markers.forEach(_changeIcon);
   }
 
   endAddMode() {
     _addingLocation = false;
     // Reset the options (styles) for the map.
     map.options = map_config.blankOptions;
+
     _clearMap();
     _displayLocations();
   }
 
+
   resize() {
-    event.trigger(map, 'resize', null);
-    _centerOnMarkers();
+    if(_shouldResize) {
+      log.info('resize.');
+
+      event.trigger(map, 'resize', null);
+      centerOnMarkers();
+
+      _shouldResize = false;
+    }
   }
+
 
   get isAddModeEnabled => _addingLocation;
 
@@ -91,8 +101,12 @@ class MapComponent implements AfterViewInit, OnChanges {
     markers.clear();
   }
 
+  _changeIcon(Marker marker) {
+    marker.icon = isAddModeEnabled ? "/pin_selected.png" : "/pin.png";
+  }
+
   /// Displays all the location on the map.
-  _displayLocations() => region.locations.values.forEach(_displayLocation);
+  _displayLocations() => locations.values.forEach(_displayLocation);
 
   /// Adds a new location to the region in firebase, not the model.
   _addLocation(MouseEvent event) {
@@ -111,9 +125,9 @@ class MapComponent implements AfterViewInit, OnChanges {
     final marker = new Marker(options)
       ..onClick.listen((_) {
         if (_addingLocation) {
-          String locationId = region.getLocationId(location);
+          String locationId = utils.key(locations, location);
 
-          if (locationId.isNotEmpty) {
+          if (locationId != null) {
             firebase.deleteStationById(id, locationId);
           }
         }
@@ -123,7 +137,7 @@ class MapComponent implements AfterViewInit, OnChanges {
   }
 
   /// Centers the map based on the coordinates in locations.
-  _centerOnMarkers() {
+  centerOnMarkers() {
     if (markers.isEmpty) {
       // Broken on Dartium.
       // map.center = await geo.currentLocation;

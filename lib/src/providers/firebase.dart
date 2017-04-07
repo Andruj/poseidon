@@ -13,8 +13,8 @@ class Firebase {
   Database _database;
   Auth _auth;
 
-  DatabaseReference _userNode;
-  DatabaseReference _regionsNode;
+  DatabaseReference fbRoot;
+  DatabaseReference fbRegions;
 
   Map<String, Region> regions = {};
   User user;
@@ -32,36 +32,7 @@ class Firebase {
     _database = database();
     _auth = auth();
 
-    _auth.onAuthStateChanged.listen((AuthEvent event) {
-      if (event.user != null) {
-        user = event.user;
-        log.info('authenticated ${user.displayName}.');
-
-        // Set up the database access points for the user.
-        _userNode = _database.ref('users').child(user.uid);
-        _regionsNode = _userNode.child('regions');
-
-        // Clear the regions and fill the empty map with the new data.
-        // This is not optimal, but since regions currently are so light,
-        // the computation is ignored.
-        _regionsNode.onValue.listen((QueryEvent event) {
-          // We always clear, since if they delete the last region
-          // it will not go into next branch.
-          regions.clear();
-
-          if (event.snapshot.exists()) {
-            Map<String, Map> data = event.snapshot.val();
-
-            regions.addAll(new Map.fromIterables(data.keys,
-                data.values.map((json) => new Region.fromMap(json))));
-
-            log.info('acquired ${regions.length} regions.');
-          }
-        });
-
-        onUser.emit(user);
-      }
-    });
+    _auth.onAuthStateChanged.listen(setup);
   }
 
   /// Authenticates a [AuthProvider] with Firebase.
@@ -74,27 +45,87 @@ class Firebase {
     }
   }
 
+  setup(AuthEvent event) {
+    if (event.user != null) {
+      user = event.user;
+      log.info('authenticated ${user.displayName}.');
+
+      // Set up the database access points for the user.
+      fbRoot = _database.ref('users').child(user.uid);
+      fbRegions = fbRoot.child('regions');
+
+      fbRegions.onChildAdded
+          .listen(Sync.add(regions, (r) => new Region.fromMap(r)));
+      fbRegions.onChildRemoved.listen(Sync.remove(regions));
+
+      // Must happen after the region is added.
+      fbRegions.onChildAdded.listen(addListeners);
+
+      onUser.emit(user);
+    }
+  }
+
+  addListeners(QueryEvent event) {
+    DatabaseReference fbRegion = fbRegions.child(event.snapshot.key);
+    Region region = regions[event.snapshot.key];
+  
+    fbRegion
+        .child('watchlist')
+        .onChildAdded
+        .listen(Sync.add(region.watchlist, DateTime.parse));
+
+    fbRegion
+        .child('watchlist')
+        .onChildRemoved
+        .listen(Sync.remove(region.watchlist));
+
+    fbRegion
+        .child('locations')
+        .onValue
+        .listen(Sync.overwrite((Map<String, Map> data) {
+      region.locations = new Map.fromIterables(
+          data.keys, data.values.map((v) => new Location.fromMap(v)));
+    }));
+  }
+
   get hasUser => user != null;
 
-  addRegion(Region region) => _regionsNode.push(region.toMap());
+  addRegion(Region region) => fbRegions.push(region.toMap());
 
   updateRegion(String id, Region region) =>
-      _regionsNode.child(id).update(region.toMap());
+      fbRegions.child(id).update(region.toMap());
 
-  deleteRegionById(String id) => _regionsNode.child(id).remove();
+  deleteRegionById(String id) => fbRegions.child(id).remove();
 
   addLocation(String id, Location location) =>
-      _regionsNode.child(id).child(Region.locationsKey).push(location.toMap());
+      fbRegions.child(id).child(Region.locationsKey).push(location.toMap());
 
   addWatcher(String id, DateTime time) =>
-      _regionsNode.child(id).child('watchlist').push(time.toIso8601String());
+      fbRegions.child(id).child('watchlist').push(time.toIso8601String());
 
   deleteWatcherById(String regionId, String id) =>
-      _regionsNode.child(regionId).child('watchlist').child(id).remove();
+      fbRegions.child(regionId).child('watchlist').child(id).remove();
 
-  deleteStationById(String regionId, String stationId) => _regionsNode
+  deleteStationById(String regionId, String stationId) => fbRegions
       .child(regionId)
       .child(Region.locationsKey)
       .child(stationId)
       .remove();
+}
+
+/// Provides useful closures to simplify [Firebase] callback chaining.
+class Sync {
+  static overwrite(convert) {
+    return (QueryEvent event) => convert(event.snapshot.val() ?? {});
+  }
+
+  static add(model, convert) {
+    return (QueryEvent event) {
+      model[event.snapshot.key] = convert(event.snapshot.val());
+    };
+  }
+
+  static remove(Map model) {
+    return (QueryEvent event) => model.remove(event.snapshot.key);
+  }
 }
