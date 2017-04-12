@@ -1,6 +1,6 @@
 language: dart
 dart: stable
-deploy:
-  provider: firebase
-  token:
-    secure: "PiCRzIhCYFJIqXeQnnAMCEwEpyYGn8w0L4yxD83MI5a6N8fjgy/pes1E0DMruNuz50uzRQdbhggm9bgoEtBi22evTjTkiclXz3rPtT+FnQ6W1HxxeBsho49gq6NVZORRhCPFpgzWFjZS9Ul8J2wYoDTfhj339H1/BMpE1cDbKZsmre43TpwnGNxPBkIXl2tantv/8+tRKHIEMQcD4MI3o49uQxvAal1Sl09BzriavDHph9lAkid0kvHOQEJOV+j42XiJRnsm51rT+H7+wyvX51PYbdPE6d4rrnj+yZJ05CdHPajD2xm6lyBzmDUrrwASlK70HTiN6e/0FUipdaEFK1EFkbC53izQLCFP92xZ/ZoyGYr7dT54AYFR9+aXy96z3w50lBissXARIkeIqOeauoZXPoMkFNw6IfooeT4hiBRvB4WDtwLEIVqGz5A9vU7ZbVcVigvQJ050PY4fXm0ZEIEzQL0DqKp31/qPCeH+7M+OCvYS/J7iLtHyr6q6zACaBiRxRGmbyUroRbKjFWSRNZgfq4hDQSlpTfhA5WFR1lvtYibjxlFipOtq2oH9ModsvzExjvNEktntyb3svXZNGSH7V4e+2HNWYu1AXdr4aiRJ8Sbc6Q8I5TvJId0lgy64n1MpRTFD9f0BrCTOhFtLtR6B3vW48xANLrNjC2RTnTI="
+install:
+    - npm install -g firebase-tools
+after_success:
+    - firebase deploy --email ${FIREBASE_USERNAME} --password ${FIREBASE_PASSWORD}i
