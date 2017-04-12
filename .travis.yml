@@ -4,5 +4,4 @@ dart:
 
 deploy:
   provider: firebase
-  token:
-    secure: "1/LVim612fCp2HRAn3B-Cp0gltP1MNrb6ypI8VUhv_cA8eG2MfTdbpEHHwhyN11zJo"
+  token: "1/LVim612fCp2HRAn3B-Cp0gltP1MNrb6ypI8VUhv_cA8eG2MfTdbpEHHwhyN11zJo"
