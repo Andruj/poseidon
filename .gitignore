@@ -24,4 +24,4 @@ doc/api/
 .idea/workspace.xml
 
 # Firebase files
-functions/node_modules/*
+functions/node_modules/
