@@ -1,7 +1,10 @@
 language: dart
 dart: stable
+xvfb: false
+install_dartium: true
 dart_task:
   - test: --platform vm
+  - test: --platform dartium
   - dartanalyzer: --fatal-warnings lib
   - dartfmt
-  - xvfb: false
+
