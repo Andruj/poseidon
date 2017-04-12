@@ -1,7 +1,6 @@
 language: dart
-dart:
-  stable
-
+dart: stable
 deploy:
   provider: firebase
-  token: "1/LVim612fCp2HRAn3B-Cp0gltP1MNrb6ypI8VUhv_cA8eG2MfTdbpEHHwhyN11zJo"
+  token:
+    secure: kq/3Y1HpNf6m+9OPl2OTrJ5tmSFDWru859/sS2Tepv2B23KS8unIEHLcmWDzdOkbd5kz2r/NIhhT0TW0z/QR0hF6hrIIRSMVZYBPyRB+B7/MJC+VizgKizQhckiDdGQmh0WWG49EUQ3BxKCvAkdlSgAoPO+jxb6Z/hqWkNjp15uy6GnW5kl3UAf6tzrf0hpNWt6ASu0U1wX7/drANH+ZrRxVbe06JrwqfQ6o2tR/7ibMkZTzNgPNBQkJWX7y1+6A+k/UAzqnmZs65pRaSKyrgdTDdH5vVmFNzT9gP4ksrY8ezp+4snmwd1EU+2LEtySsUrhsfsm1gNM6gWHjzc9q8JIHTqUwMnz1kmYl5UGBsuSXOoAHHXZMk19I29Q3rmegBv/nR5LziiOovPSCUR6Qh17jtSb7dR2Jh5R6/Po8cXwuMxvHzP6E2ZCXSabGjJTw78diC0QChXX1Wh/zdREmgNBe3+QGrz4/8/vZ/JHLouRHq7gvTq2gK5jAYd6ZUBGKQxLSU8tESSoubvtoFUsnR+kIrPMMUocQfZc9RB6KuubxH9KIxe6P9ARIu597rJi6deTrSxirjtfozhszu2mk0s4I4Ep6fwRbBD8DcZIxMzMTQ0ba4/Az11bTg4Iw6EbXh83cJuy7LPpYdbCbuECdnk9foOPBS0QPUlPbsMpbI7A=
