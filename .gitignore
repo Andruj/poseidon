@@ -22,3 +22,6 @@ doc/api/
 *.ipr
 *.iws
 .idea/workspace.xml
+
+# Firebase files
+functions/node_modules/*
