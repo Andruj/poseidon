@@ -8,3 +8,8 @@ dart_task:
   - dartanalyzer: --fatal-warnings lib
   - dartfmt
 
+before_install:
+  - (nvm install node && cd functions/ && npm install)
+
+script:
+  - (cd functions/ && npm test)
