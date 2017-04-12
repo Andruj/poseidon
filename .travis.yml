@@ -1,15 +1,10 @@
 language: dart
 dart: stable
-xvfb: false
 install_dartium: true
 dart_task:
   - test: --platform vm
   - test: --platform dartium
   - dartanalyzer: --fatal-warnings lib
   - dartfmt
-
-before_install:
-  - (nvm install node && cd functions/ && npm install)
-
-script:
-  - (cd functions/ && npm test)
+  - script:
+    - echo "Hello World"
