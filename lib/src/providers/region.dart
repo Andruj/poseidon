@@ -1,6 +1,6 @@
 part of providers;
 
-class Region {
+class Region  {
   static const locationsKey = "locations";
 
   String name;

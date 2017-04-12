@@ -49,12 +49,15 @@ class CalendarComponent implements OnChanges {
       forecasts =
           await Future.wait(locations.values.map(weather.getForecast));
 
+      // Aggregate each location's forecast to an average snapshot per region.
       aggregates = quiver.zip(forecasts.map((forecast) => forecast.data)).map(
           (snaps) =>
               new app.Snapshot.fromSnapshots(snaps as List<app.Snapshot>));
 
+      // Find the most windy snapshot.
       ceiling = aggregates.reduce((a, b) => a.wind > b.wind ? a : b);
 
+      // Split the snapshot into days.
       aggregates.forEach((app.Snapshot s) {
         if (days.containsKey(s.time.day)) {
           days[s.time.day].add(s);

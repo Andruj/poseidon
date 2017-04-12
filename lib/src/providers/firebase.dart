@@ -50,6 +50,7 @@ class Firebase {
       user = event.user;
       log.info('authenticated ${user.displayName}.');
 
+
       // Set up the database access points for the user.
       fbRoot = _database.ref('users').child(user.uid);
       fbRegions = fbRoot.child('regions');
@@ -58,7 +59,7 @@ class Firebase {
           .listen(Sync.add(regions, (r) => new Region.fromMap(r)));
       fbRegions.onChildRemoved.listen(Sync.remove(regions));
 
-      // Must happen after the region is added.
+//       Must happen after the region is added.
       fbRegions.onChildAdded.listen(addListeners);
 
       onUser.emit(user);
@@ -112,6 +113,7 @@ class Firebase {
       .child(stationId)
       .remove();
 }
+
 
 /// Provides useful closures to simplify [Firebase] callback chaining.
 class Sync {

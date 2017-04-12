@@ -3,6 +3,7 @@ library providers;
 import 'dart:html';
 import 'dart:async';
 import 'dart:convert';
+import 'dart:collection';
 
 import 'package:angular2/angular2.dart';
 import 'package:firebase/firebase.dart';
