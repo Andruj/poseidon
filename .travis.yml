@@ -1,3 +1,7 @@
 language: dart
 dart: stable
-dartanalyzer: true
+dart_task:
+  - test: --platform vm
+  - dartanalyzer: --fatal-warnings lib
+  - dartfmt
+  - xvfb: false
