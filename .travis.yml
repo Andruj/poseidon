@@ -1,8 +1,22 @@
 language: dart
-dart: stable
-install_dartium: true
+dart:
+  - stable
+  - dev
 dart_task:
   - test: --platform vm
+  - test: --platform chrome
   - test: --platform dartium
-  - dartanalyzer: --fatal-warnings lib
-  - dartfmt: true
+    install_dartium: true
+matrix:
+  include:
+    # Only validate formatting using the dev release
+    # Formatted with 1.23.0-dev.10.0 which has (good) changes since 1.22.1
+    - dart: stable
+      dart_task: dartfmt
+    # Only care about being analyzer clean for dev and stable
+    - dart: stable
+      dart_task:
+        dartanalyzer: --fatal-warnings lib
+cache:
+  directories:
+    - $HOME/.pub-cache
