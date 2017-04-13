@@ -5,6 +5,6 @@ dart_task:
   - test: --platform vm
   - test: --platform dartium
   - dartanalyzer: --fatal-warnings lib
-  - dartfmt
-  - script:
-    - echo "Hello World"
+  - dartfmt: true
+script:
+  - ./.functions_build.sh
