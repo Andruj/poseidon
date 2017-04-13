@@ -3,7 +3,16 @@
   "description": "Cloud Functions for Firebase",
   "dependencies": {
     "firebase-admin": "~4.1.2",
-    "firebase-functions": "^0.5"
+    "firebase-functions": "^0.5.5"
   },
-  "private": true
+  "scripts": {
+    "test": "mocha test"
+  },
+  "private": true,
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-as-promised": "^6.0.0",
+    "mocha": "^3.2.0",
+    "sinon": "^2.1.0"
+  }
 }
