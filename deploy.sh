@@ -1,0 +1,1 @@
+pub build && firebase deploy
