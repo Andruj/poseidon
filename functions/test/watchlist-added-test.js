@@ -19,7 +19,9 @@ describe('onWatchlistAdded', () => {
     onWatchlistAdded = require('../watchlist-added.js');
   });
 
-  after(env.restore);
+  after(() => {
+    env.restore();
+  });
 
   it('should upper case input and write it to /uppercase', () => {
       const fakeEvent = {
