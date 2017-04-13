@@ -1,10 +1,14 @@
 language: dart
 dart: stable
 install_dartium: true
-dart_task:
-  - test: --platform vm
-  - test: --platform dartium
-  - dartanalyzer: --fatal-warnings lib
-  - dartfmt: true
+
+before_install:
+  - nvm install node
+install:
+  - (cd functions/ && npm install)
+
 script:
-  - ./.functions_build.sh
+  - cd functions && npm test
+  - pub run test --platform vm
+  - pub run test --platform dartium
+  - dart_analyzer
