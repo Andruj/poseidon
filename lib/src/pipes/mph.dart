@@ -14,7 +14,7 @@ class UnitPipe extends PipeTransform {
   static const truncate = 0;
 
   String transform(val, String units) {
-    if(Unit.mph == units) {
+    if (Unit.mph == units) {
       num mph = val * toMph;
       return '${mph.round().toStringAsFixed(truncate)}';
     }

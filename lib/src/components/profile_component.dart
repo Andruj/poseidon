@@ -14,6 +14,5 @@ class ProfileComponent implements OnInit {
 
   ProfileComponent();
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 }

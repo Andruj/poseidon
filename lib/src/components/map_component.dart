@@ -77,9 +77,8 @@ class MapComponent implements AfterViewInit, OnChanges {
     _displayLocations();
   }
 
-
   resize() {
-    if(_shouldResize) {
+    if (_shouldResize) {
       log.info('resize.');
 
       event.trigger(map, 'resize', null);
@@ -88,7 +87,6 @@ class MapComponent implements AfterViewInit, OnChanges {
       _shouldResize = false;
     }
   }
-
 
   get isAddModeEnabled => _addingLocation;
 

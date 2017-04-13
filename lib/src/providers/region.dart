@@ -1,6 +1,6 @@
 part of providers;
 
-class Region  {
+class Region {
   static const locationsKey = "locations";
 
   String name;
@@ -11,10 +11,11 @@ class Region  {
     Map<String, Map> _locations = json[locationsKey] ?? {};
     Map<String, String> _watchlist = json['watchlist'] ?? {};
 
-    this.locations = new Map.fromIterables(
-        _locations.keys, _locations.values.map((json) => new Location.fromMap(json)));
+    this.locations = new Map.fromIterables(_locations.keys,
+        _locations.values.map((json) => new Location.fromMap(json)));
 
-    this.watchlist = new Map.fromIterables(_watchlist.keys, _watchlist.values.map(DateTime.parse));
+    this.watchlist = new Map.fromIterables(
+        _watchlist.keys, _watchlist.values.map(DateTime.parse));
   }
 
   Map toMap() {
@@ -22,7 +23,8 @@ class Region  {
       'name': name,
       locationsKey: new Map.fromIterables(
           locations.keys, locations.values.map((Location l) => l.toMap())),
-      'watchlist': new Map.fromIterables(watchlist.keys, watchlist.values.map((date) => date.toIso8601String()))
+      'watchlist': new Map.fromIterables(watchlist.keys,
+          watchlist.values.map((date) => date.toIso8601String()))
     };
   }
 

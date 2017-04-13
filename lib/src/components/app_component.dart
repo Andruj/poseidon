@@ -5,10 +5,7 @@ part of components;
 
 @RouteConfig(const [
   const Route(
-      path: '/',
-      component: LoginComponent,
-      name: 'Login',
-      useAsDefault: true),
+      path: '/', component: LoginComponent, name: 'Login', useAsDefault: true),
   const Route(
       path: '/dashboard/...', component: DashboardComponent, name: 'Dashboard')
 ])

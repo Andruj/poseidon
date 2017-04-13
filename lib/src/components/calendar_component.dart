@@ -40,14 +40,12 @@ class CalendarComponent implements OnChanges {
   isWatching(app.Snapshot s) => watchlist.containsValue(s.time);
   getWatchlistKey(app.Snapshot s) => utils.key(watchlist, s.time);
 
-
   _setup() async {
     log.info('onChanges.');
     days.clear();
 
     if (locations.isNotEmpty) {
-      forecasts =
-          await Future.wait(locations.values.map(weather.getForecast));
+      forecasts = await Future.wait(locations.values.map(weather.getForecast));
 
       // Aggregate each location's forecast to an average snapshot per region.
       aggregates = quiver.zip(forecasts.map((forecast) => forecast.data)).map(
@@ -65,7 +63,6 @@ class CalendarComponent implements OnChanges {
           days[s.time.day] = [s];
         }
       });
-
     }
   }
 }

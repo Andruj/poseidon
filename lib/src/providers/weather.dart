@@ -72,7 +72,6 @@ class Snapshot {
 
   get combined => _combined;
 
-
   @override
   String toString() {
     return '''

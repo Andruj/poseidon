@@ -50,7 +50,6 @@ class Firebase {
       user = event.user;
       log.info('authenticated ${user.displayName}.');
 
-
       // Set up the database access points for the user.
       fbRoot = _database.ref('users').child(user.uid);
       fbRegions = fbRoot.child('regions');
@@ -69,7 +68,7 @@ class Firebase {
   addListeners(QueryEvent event) {
     DatabaseReference fbRegion = fbRegions.child(event.snapshot.key);
     Region region = regions[event.snapshot.key];
-  
+
     fbRegion
         .child('watchlist')
         .onChildAdded
@@ -113,7 +112,6 @@ class Firebase {
       .child(stationId)
       .remove();
 }
-
 
 /// Provides useful closures to simplify [Firebase] callback chaining.
 class Sync {

@@ -18,7 +18,6 @@ part 'package:poseidon/src/providers/weather.dart';
 part 'package:poseidon/src/providers/region.dart';
 part 'package:poseidon/src/providers/location.dart';
 
-
 /// A collection of common services.
 const providers = const [];
 

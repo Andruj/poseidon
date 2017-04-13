@@ -36,9 +36,7 @@ class SnapshotComponent implements OnChanges {
   @Input()
   app.Snapshot snapshot;
 
-
-  SnapshotComponent(this.firebase) {
-  }
+  SnapshotComponent(this.firebase) {}
 
   ngOnChanges(_) {
     log.info('onChanges.');
@@ -51,14 +49,11 @@ class SnapshotComponent implements OnChanges {
   }
 
   select() {
-    if(!watching) {
+    if (!watching) {
       firebase.addWatcher(regionId, snapshot.time);
     } else {
       log.info('Deleting watchlist element.');
       firebase.deleteWatcherById(regionId, watchlistId);
     }
   }
-
-
-
 }
