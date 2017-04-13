@@ -13,4 +13,3 @@ streamline account creation.
     - a time I am watching becomes viable.
     - a time I am watching become unstable.
     - a time I am watching switches locations.
-- As a user I can specify an offset to a wind sensor.
