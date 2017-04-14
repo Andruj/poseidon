@@ -63,7 +63,7 @@
 
 <material-expansionpanel-set *ngIf="regions.isNotEmpty">
     <material-expansionpanel
-            *ngFor="#key of regions.keys"
+            *ngFor="let key of regions.keys"
             showSaveCancel="false"
             (expandedChange)="toggleFab()"
             [name]="regions[key].name">

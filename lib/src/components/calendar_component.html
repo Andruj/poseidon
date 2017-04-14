@@ -1,9 +1,9 @@
-<div class="calendar-day" *ngFor="#day of days.keys">
+<div class="calendar-day" *ngFor="let day of days.keys">
     <div class="row chip-row">
         <div class="chip">{{days[day].first.time | date}}</div>
     </div>
     <div class="row">
-        <div class="cell" *ngFor="#snapshot of days[day]">
+        <div class="cell" *ngFor="let snapshot of days[day]">
             <snapshot
                       [watching]="isWatching(snapshot)"
                       [watchlistId]="getWatchlistKey(snapshot)"
