@@ -14,6 +14,11 @@ part of components;
     component: ProfileComponent,
     name: 'Profile',
   ),
+  const Route(
+    path: '/overview',
+    component: OverviewComponent,
+    name: 'Overview',
+  ),
 ])
 @Component(
   selector: 'dashboard',
@@ -27,12 +32,21 @@ class DashboardComponent implements OnInit {
   final Router router;
   final Logger log = new Logger('DashboardComponent');
 
+  bool isMenuOpen = false;
+
   String displayName;
   String photoUrl;
 
-  bool isSelected = true;
-
   DashboardComponent(this.firebase, this.router);
+
+
+  toggleMenu() {
+    isMenuOpen = !isMenuOpen;
+  }
+
+  bool get isMenuClosed => !isMenuOpen;
+
+  isSelected(String button) => AppComponent.currentRoute.endsWith(button);
 
   ngOnInit() {
     if (firebase.hasUser) {
@@ -43,5 +57,6 @@ class DashboardComponent implements OnInit {
 
   navigateTo(String location) {
     router.navigate([location]);
+    isMenuOpen = false;
   }
 }

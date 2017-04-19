@@ -5,7 +5,7 @@
         <h3 header>{{newRegionName.isEmpty ? "Create Region" : newRegionName}}</h3>
         <div class="row">
             <div class="col s12 no-padding">
-                <input autofocus placeholder="Region name..." [(ngModel)]="newRegionName"/>
+                <input autofocus="true" (keypress)="submit($event)" placeholder="Region name..." [(ngModel)]="newRegionName" #newRegionInput/>
             </div>
         </div>
 
@@ -34,7 +34,7 @@
         [class.scale-in]="fabVisible"
         [class.scale-out]="fabHidden"
         [disabled]="showDialog"
-        (click)="showDialog = true"
+        (click)="openModal()"
         raised>
     <glyph icon="add"></glyph>
 </material-fab>

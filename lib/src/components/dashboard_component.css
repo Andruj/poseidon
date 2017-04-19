@@ -2,6 +2,17 @@
     background: white;
 }
 
+.mobile-menu {
+    background: white;
+}
+
+.menu-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 8px;
+}
+
 .photo-overlay {
     position: absolute;
     top: 0;

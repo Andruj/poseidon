@@ -1,11 +1,11 @@
 
 
-.breadcrumb {
+.bar {
     font-weight: 300;
     font-size: 1.8em;
 }
 
-.breadcrumb:before {
+.bar:before {
     /* blue-grey lighten-1 */
     color: #607d8b;
 }

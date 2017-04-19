@@ -1,22 +1,71 @@
+<material-button
+        class="menu-button hide-on-med-and-up"
+        (click)="toggleMenu()"
+        icon>
+    <glyph *ngIf="isMenuClosed" icon="expand_more"></glyph>
+    <glyph *ngIf="isMenuOpen" icon="expand_less"></glyph>
+</material-button>
+
+<div [hidden]="isMenuClosed" class="mobile-menu hide-on-med-and-up">
+    <material-button
+            (click)="navigateTo('./Overview')"
+            [class.lighten-1]="isSelected('overview')"
+            [class.blue-grey]="isSelected('overview')"
+            class="card-action">
+        <a [class.white-text]="isSelected('overview')" class="blue-grey-text">
+            Overview
+        </a>
+    </material-button>
+    <material-button
+            (click)="navigateTo('./Regions')"
+            [class.lighten-1]="isSelected('regions')"
+            [class.blue-grey]="isSelected('regions')"
+            class="card-action">
+        <a      [class.white-text]="isSelected('regions')"
+                class="blue-grey-text">Regions</a>
+    </material-button>
+    <material-button
+            (click)="navigateTo('./Profile')"
+            [class.ligthen-1]="isSelected('profile')"
+            [class.blue-grey]="isSelected('profile')"
+            class="card-action">
+        <a class="blue-grey-text" [class.white-text]="isSelected('profile')">Profile</a>
+    </material-button>
+</div>
+
 <div class="container-full">
     <div class="row">
-        <div class="col s0 m3 l2 no-padding">
+        <div class="col s12 m3 l2 no-padding hide-on-small-only">
             <div class="card sidebar">
                 <div class="card-image">
                     <img src="{{photoUrl}}">
                     <div class="photo-overlay"></div>
                     <span class="hide-on-med-and-down truncate card-title quicksand">{{displayName}}</span>
                 </div>
+
+                <material-button
+                    (click)="navigateTo('./Overview')"
+                    [class.lighten-1]="isSelected('overview')"
+                    [class.blue-grey]="isSelected('overview')"
+                    class="card-action">
+                    <a [class.white-text]="isSelected('overview')" class="blue-grey-text">
+                        Overview
+                    </a>
+                </material-button>
                 <material-button
                         (click)="navigateTo('./Regions')"
-                        [class.lighten-1]="isSelected"
-                        [class.blue-grey]="isSelected"
+                        [class.lighten-1]="isSelected('regions')"
+                        [class.blue-grey]="isSelected('regions')"
                         class="card-action">
-                    <a      [class.white-text]="isSelected"
+                    <a      [class.white-text]="isSelected('regions')"
                             class="blue-grey-text">Regions</a>
                 </material-button>
-                <material-button (click)="navigateTo('./Profile')" class="card-action">
-                    <a class="blue-grey-text">Profile</a>
+                <material-button
+                        (click)="navigateTo('./Profile')"
+                        [class.ligthen-1]="isSelected('profile')"
+                        [class.blue-grey]="isSelected('profile')"
+                        class="card-action">
+                    <a class="blue-grey-text" [class.white-text]="isSelected('profile')">Profile</a>
                 </material-button>
                 <div class="card-action"></div>
             </div>

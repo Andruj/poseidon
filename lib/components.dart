@@ -27,6 +27,7 @@ part 'src/components/map_component.dart';
 part 'src/components/calendar_component.dart';
 part 'src/components/details_component.dart';
 part 'src/components/snapshot_component.dart';
+part 'src/components/overview_component.dart';
 
 const rootComponent = AppComponent;
 const appDirectives = const [
@@ -40,4 +41,5 @@ const appDirectives = const [
   CalendarComponent,
   SnapshotComponent,
   DetailsComponent,
+  OverviewComponent,
 ];

@@ -16,6 +16,9 @@ class RegionsComponent implements OnInit {
 
   final Map<String, app.Region> regions;
 
+  @ViewChild('newRegionInput')
+  ElementRef newRegionInput;
+
   bool fabVisible = true;
   bool showDialog = false;
   String newRegionName = "";
@@ -43,6 +46,18 @@ class RegionsComponent implements OnInit {
   resetDialog() {
     showDialog = false;
     newRegionName = "";
+    newRegionInput.nativeElement.blur();
+  }
+
+  openModal() {
+    showDialog = true;
+    newRegionInput.nativeElement.focus();
+  }
+
+  submit(KeyEvent event) {
+    if(event.keyCode == 13) {
+      addRegion();
+    }
   }
 
   get fabHidden => !fabVisible;

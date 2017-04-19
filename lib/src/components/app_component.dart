@@ -30,10 +30,13 @@ class AppComponent {
   final app.Firebase firebase;
   final Router router;
   final Logger log = new Logger('AppComponent');
+  static String currentRoute = 'dashboard/regions';
 
   bool isTransparent = true;
 
   final List<String> breadcrumbs = [];
+
+  String get mobileTitle => breadcrumbs.isNotEmpty ? breadcrumbs.last : 'Loading..';
 
   AppComponent(this.firebase, this.router) {
     firebase.onUser.listen((_) {
@@ -44,6 +47,8 @@ class AppComponent {
 
     router.onStartNavigation.listen((String path) {
       log.info('navigating to $path');
+
+      currentRoute = path == 'dashboard' ? 'dashboard/regions' : path;
 
       if (path.isEmpty) {
         breadcrumbs.add('Poseidon');

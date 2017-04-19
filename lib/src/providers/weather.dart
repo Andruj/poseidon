@@ -20,15 +20,12 @@ class Forecast {
 
   final String name;
   final num id;
-  final LatLng position;
   final List<Snapshot> data;
 
   Forecast.fromMap(Map json)
-      : name = json['city']['name'],
-        id = json['city']['id'],
-        position = new LatLng(
-            json['city']['coord']['lat'], json['city']['coord']['lon']),
-        data = json['list'].map((snap) => new Snapshot.fromMap(snap)).toList();
+      : name = json['name'],
+        id = json['id'],
+        data = json['data'].map((snap) => new Snapshot.fromMap(snap)).toList();
 
   @override
   String toString() {
@@ -37,7 +34,6 @@ class Forecast {
 [Forecast
     (name: $name)
     (id: $id)
-    (position: $position)
     (data: ${data.length})]''';
   }
 }
@@ -54,12 +50,12 @@ class Snapshot {
   bool watching = false;
 
   Snapshot.fromMap(Map json)
-      : time = new DateTime.fromMillisecondsSinceEpoch(json['dt'] * 1000),
-        temp = json['main']['temp'],
-        humidity = json['main']['humidity'],
-        clouds = json['clouds']['all'],
-        wind = json['wind']['speed'],
-        direction = json['wind']['deg'];
+      : time = new DateTime.fromMillisecondsSinceEpoch(json['time']),
+        temp = json['temp'],
+        humidity = json['humidity'],
+        clouds = json['clouds'],
+        wind = json['wind'],
+        direction = json['direction'];
 
   Snapshot.fromSnapshots(List<Snapshot> snapshots)
       : _combined = true,

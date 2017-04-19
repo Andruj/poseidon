@@ -4,6 +4,9 @@ import 'dart:html';
 import 'dart:async';
 import 'dart:convert';
 import 'dart:collection';
+import 'dart:js' as js;
+
+import 'package:js/js.dart';
 
 import 'package:angular2/angular2.dart';
 import 'package:firebase/firebase.dart';

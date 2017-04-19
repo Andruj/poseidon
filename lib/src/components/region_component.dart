@@ -43,7 +43,8 @@ class RegionComponent {
   /// Delay in milliseconds to resize the map after changing to the tab.
   static const int _delay = 250;
 
-  RegionComponent(this.firebase, this.weather);
+  RegionComponent(this.firebase, this.weather) {
+  }
 
   /// Deletes a region from Firebase.
   delete() {
