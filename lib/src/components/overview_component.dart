@@ -7,6 +7,4 @@ part of components;
   directives: const [materialDirectives, appDirectives],
   providers: const [materialProviders, app.providers],
 )
-class OverviewComponent {
-
-}
+class OverviewComponent {}

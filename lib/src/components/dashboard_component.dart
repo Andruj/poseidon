@@ -39,7 +39,6 @@ class DashboardComponent implements OnInit {
 
   DashboardComponent(this.firebase, this.router);
 
-
   toggleMenu() {
     isMenuOpen = !isMenuOpen;
   }

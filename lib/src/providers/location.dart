@@ -13,7 +13,9 @@ class Location {
 
   Location.fromMap(Map json)
       : position = new LatLng(json['lat'], json['lng']),
-        forecast = json['forecast'] != null ? new Forecast.fromMap(json['forecast']) : null;
+        forecast = json['forecast'] != null
+            ? new Forecast.fromMap(json['forecast'])
+            : null;
 
   Map toMap() {
     return {

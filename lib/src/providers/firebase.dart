@@ -6,7 +6,6 @@ const databaseUrl = "https://poseidon-ed88d.firebaseio.com";
 const storageBucket = "poseidon-ed88d.appspot.com";
 const messagingSenderId = "74668054832";
 
-
 @Injectable()
 class Firebase {
   final Logger log = new Logger('Firebase');
@@ -30,10 +29,8 @@ class Firebase {
 //        databaseURL: databaseUrl,
 //        storageBucket: storageBucket);
 
-
     _database = database();
     _auth = auth();
-
 
     _auth.onAuthStateChanged.listen(setup);
   }
@@ -86,10 +83,10 @@ class Firebase {
         .child('locations')
         .onValue
         .listen(Sync.overwrite((Map<String, Map> data) {
-          if(data.values.every((loc) => loc['forecast'] != null)) {
-            region.locations = new Map.fromIterables(
-                data.keys, data.values.map((v) => new Location.fromMap(v)));
-          }
+      if (data.values.every((loc) => loc['forecast'] != null)) {
+        region.locations = new Map.fromIterables(
+            data.keys, data.values.map((v) => new Location.fromMap(v)));
+      }
     }));
   }
 

@@ -36,7 +36,8 @@ class AppComponent {
 
   final List<String> breadcrumbs = [];
 
-  String get mobileTitle => breadcrumbs.isNotEmpty ? breadcrumbs.last : 'Loading..';
+  String get mobileTitle =>
+      breadcrumbs.isNotEmpty ? breadcrumbs.last : 'Loading..';
 
   AppComponent(this.firebase, this.router) {
     firebase.onUser.listen((_) {

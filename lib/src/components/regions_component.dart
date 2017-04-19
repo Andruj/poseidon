@@ -55,7 +55,7 @@ class RegionsComponent implements OnInit {
   }
 
   submit(KeyEvent event) {
-    if(event.keyCode == 13) {
+    if (event.keyCode == 13) {
       addRegion();
     }
   }

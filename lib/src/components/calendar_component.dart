@@ -45,7 +45,9 @@ class CalendarComponent implements OnChanges {
     days.clear();
 
     if (locations != null && locations.isNotEmpty) {
-      forecasts = locations.values.where((loc) => loc.forecast != null).map((loc) => loc.forecast);
+      forecasts = locations.values
+          .where((loc) => loc.forecast != null)
+          .map((loc) => loc.forecast);
 
       // Aggregate each location's forecast to an average snapshot per region.
       aggregates = quiver.zip(forecasts.map((forecast) => forecast.data)).map(
