@@ -1,20 +1,16 @@
 <nav    [class.transparent]="isTransparent"
-        [class.white]="!isTransparent"
+        [class.blue]="!isTransparent"
         [class.z-depth-0]="isTransparent"
         [class.z-depth-1]="!isTransparent">
 
     <div class="nav-wrapper">
 
-        <div class="col s12 black-text">
+        <div class="col s12 white-text">
             <a href="#" *ngFor="let breadcrumb of breadcrumbs"
-               [class.black-text]="!isTransparent"
-               [class.white-text]="isTransparent"
                class="breadcrumb bar quicksand hide-on-small-only">
                 {{breadcrumb}}
             </a>
             <a *ngIf="breadcrumbs.isNotEmpty" href="#"
-               [class.black-text]="!isTransparent"
-               [class.white-text]="isTransparent"
                class="quicksand bar hide-on-med-and-up">
                 {{breadcrumbs.last}}
             </a>

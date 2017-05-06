@@ -43,7 +43,7 @@
 <div class="buttons">
     <material-fab
             id="center_location"
-            class="white-text teal lighten-2 scale-transition"
+            class="white-text red accent-2 scale-transition"
 
             [class.scale-in]="inMapTab"
             [class.scale-out]="!inMapTab"
@@ -56,9 +56,9 @@
 
     <material-fab
             id="add_location"
-            class="white-text lighten-2 scale-transition"
+            class="white-text accent-2 scale-transition"
 
-            [class.green]="!mapComponent.isAddModeEnabled"
+            [class.red]="!mapComponent.isAddModeEnabled"
             [class.grey]="mapComponent.isAddModeEnabled"
             [class.darken-1]="mapComponent.isAddModeEnabled"
 
@@ -75,7 +75,7 @@
 
     <material-fab
             id="delete"
-            class="red lighten-2 white-text"
+            class="red accent-2 white-text"
             (click)="showDeleteDialog = true"
             [disabled]="showDeleteDialog"
             mini raised>

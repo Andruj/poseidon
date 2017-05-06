@@ -1,35 +1,29 @@
 <material-button
-        class="menu-button hide-on-med-and-up"
+        class="menu-button hide-on-med-and-up "
         (click)="toggleMenu()"
         icon>
-    <glyph *ngIf="isMenuClosed" icon="expand_more"></glyph>
-    <glyph *ngIf="isMenuOpen" icon="expand_less"></glyph>
+    <glyph *ngIf="isMenuClosed" icon="expand_more" class="white-text"></glyph>
+    <glyph *ngIf="isMenuOpen" icon="expand_less" class="white-text"></glyph>
 </material-button>
 
 <div [hidden]="isMenuClosed" class="mobile-menu hide-on-med-and-up">
     <material-button
             (click)="navigateTo('./Overview')"
-            [class.lighten-1]="isSelected('overview')"
-            [class.blue-grey]="isSelected('overview')"
             class="card-action">
-        <a [class.white-text]="isSelected('overview')" class="blue-grey-text">
+        <a class="grey-text text-darken-4">
             Overview
         </a>
     </material-button>
     <material-button
             (click)="navigateTo('./Regions')"
-            [class.lighten-1]="isSelected('regions')"
-            [class.blue-grey]="isSelected('regions')"
             class="card-action">
-        <a      [class.white-text]="isSelected('regions')"
-                class="blue-grey-text">Regions</a>
+        <a      [class.blue-text]="isSelected('regions')"
+                [class.black-text]="!isSelected('regions')">Regions</a>
     </material-button>
     <material-button
             (click)="navigateTo('./Profile')"
-            [class.ligthen-1]="isSelected('profile')"
-            [class.blue-grey]="isSelected('profile')"
             class="card-action">
-        <a class="blue-grey-text" [class.white-text]="isSelected('profile')">Profile</a>
+        <a class="grey-text text-darken-4" [class.white-text]="isSelected('profile')">Profile</a>
     </material-button>
 </div>
 
@@ -44,30 +38,26 @@
                 </div>
 
                 <material-button
-                    (click)="navigateTo('./Overview')"
-                    [class.lighten-1]="isSelected('overview')"
-                    [class.blue-grey]="isSelected('overview')"
-                    class="card-action">
-                    <a [class.white-text]="isSelected('overview')" class="blue-grey-text">
+                        (click)="navigateTo('./Overview')"
+                        class="card-action">
+                    <a
+                       [class.blue-text]="isSelected('overview')"
+                       [class.black-text]="!isSelected('overview')">
                         Overview
                     </a>
                 </material-button>
                 <material-button
                         (click)="navigateTo('./Regions')"
-                        [class.lighten-1]="isSelected('regions')"
-                        [class.blue-grey]="isSelected('regions')"
                         class="card-action">
-                    <a      [class.white-text]="isSelected('regions')"
-                            class="blue-grey-text">Regions</a>
+                    <a      [class.blue-text]="isSelected('regions')"
+                            [class.black-text]="!isSelected('regions')">Regions</a>
                 </material-button>
                 <material-button
                         (click)="navigateTo('./Profile')"
-                        [class.ligthen-1]="isSelected('profile')"
-                        [class.blue-grey]="isSelected('profile')"
                         class="card-action">
-                    <a class="blue-grey-text" [class.white-text]="isSelected('profile')">Profile</a>
+                    <a [class.blue-text]="isSelected('profile')"
+                       [class.black-text]="!isSelected('profile')">Profile</a>
                 </material-button>
-                <div class="card-action"></div>
             </div>
         </div>
         <div class="col s12 m9 l10 scrollable calc-height">

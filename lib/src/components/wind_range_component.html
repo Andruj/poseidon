@@ -1,0 +1,26 @@
+<div class="col s12 l6">
+    <p class="range-field">
+        <input [(ngModel)]="region.maxWind"
+               (ngModelChanged)="region.maxWind = num.parse($event.value)"
+               (change)="updateRegion()"
+               type="range"
+               id="maxWind"
+               min="0"
+               max="50"
+               #maxWind />
+        <label for="maxWind">Maximum Wind Speed</label>
+    </p>
+</div>
+<div class="col s12 l6">
+    <p class="range-field">
+        <input [(ngModel)]="region.minWind"
+               (ngModelChanged)="region.minWind = num.parse($event.value)"
+               (change)="updateRegion()"
+               type="range"
+               id="minWind"
+               min="0"
+               max="50"
+               #minWind />
+        <label for="minWind">Minimum Wind Speed</label>
+    </p>
+</div>

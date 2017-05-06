@@ -1,27 +1,15 @@
 <div class="row region-settings">
-    <form class="col s12">
-        <div class="row">
+    <form class="no-padding col s12">
+        <div class="row no-margin">
             <div class="col s6 input-field">
-                <input [(ngModel)]="region.name" id="name" (ngModelChange)="update()"/>
+                <input  [class.invalid]="region.name.isEmpty"
+                        type="text" [(ngModel)]="region.name" id="name" (ngModelChange)="update()"/>
                 <label class="active" for="name">Region Name</label>
             </div>
         </div>
-        <div class="row">
-            <!--<div class="col s3">-->
-                <!--<label>Threshold</label>-->
-                <!--<select class="browser-default" [(ngModel)]="region.direction" (ngModelChange)="update()">-->
-                    <!--<option selected [ngValue]="region.MAX">Higher than</option>-->
-                    <!--<option [ngValue]="region.MIN">Slower than</option>-->
-                <!--</select>-->
 
-            <!--</div>-->
-            <!--<div class="col s9 input-field">-->
-
-                <!--<input [(ngModel)]="region.wind" id="wind" (ngModelChange)="update()"/>-->
-                <!--<label class="active" for="name">{{region.direction == region.MAX ? "Max Windspeed" : "Min Windspeed"}}</label>-->
-            <!--</div>-->
-            <div class="col s6 input-field">
-            </div>
+        <div class="row no-margin">
+            <wind-range (update)="update()" [region]="region"></wind-range>
         </div>
     </form>
 </div>

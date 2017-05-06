@@ -37,6 +37,10 @@ html {
     padding: 0;
 }
 
+.no-margin {
+    margin: 0;
+}
+
 .no-top-padding {
     padding-top: 0;
 }
@@ -82,3 +86,32 @@ html {
 .no-header-footer-dialog {
   width: 480px;
 }
+
+
+
+/* Materialize CSS Needs Custom Overrides on the Colors */
+
+   /* label focus color */
+   .input-field input:focus + label {
+     color: #2196f3;
+   }
+   /* label underline focus color */
+   .input-field input:focus {
+     border-bottom: 1px solid #2196f3;
+     box-shadow: 0 1px 0 0 #2196f3;
+   }
+   /* valid color "green lighten-1" */
+   .input-field input.valid {
+     border-bottom: 1px solid #66bb6a;
+     box-shadow: 0 1px 0 0 #66bb6a;
+   }
+   /* invalid color "red accent-2" */
+   .input-field input.invalid {
+     border-bottom: 1px solid #ff5252;
+     box-shadow: 0 1px 0 0 #ff5252;
+   }
+   /* icon prefix focus color */
+   .input-field .prefix.active {
+     color: #2196f3;
+   }
+

@@ -14,6 +14,10 @@ class DetailsComponent implements OnInit {
   final app.Firebase firebase;
   final Logger log = new Logger('DetailsComponent');
 
+  bool minimumWindEnabled = false;
+  int minWind = 0;
+  int maxWind = 15;
+
   @Input()
   app.Region region;
 
@@ -29,4 +33,10 @@ class DetailsComponent implements OnInit {
     log.info('updating $id to $region');
     firebase.updateRegion(id, region);
   }
+
+  bool get validMinWind => minWind != null && minWind > 0 && minWind < maxWind;
+  bool get validMaxWind =>
+      maxWind != null &&
+      maxWind > 0 &&
+      (minimumWindEnabled ? maxWind > minWind ?? 0 : true);
 }

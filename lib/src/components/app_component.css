@@ -7,10 +7,13 @@
 
 .bar:before {
     /* blue-grey lighten-1 */
-    color: #607d8b;
+    color: #bbdefb;
 }
 
 .nav-wrapper {
     padding: 0px 15px;
 }
 
+.breadcrumb {
+    color: white;
+}

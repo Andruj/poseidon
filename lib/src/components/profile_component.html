@@ -1,17 +1,35 @@
 <div class="card-panel">
-    <div class="section no-top-padding">
-        <h5>Notification Settings</h5>
-        <material-checkbox></material-checkbox>
-    </div>
-    <div class="divider"></div>
-    <div class="section">
-        <h5>Wind Settings</h5>
-        <material-radio-group>
-            <material-radio [checked]="true">
-            </material-radio>
-            <material-radio>
-            </material-radio>
-        </material-radio-group>
-
+    <div class="row region-settings">
+        <form class="no-padding col s12">
+            <div class="row no-margin">
+                <div class="col s6 input-field">
+                    <input  id="name"/>
+                    <label class="active" for="name">Region Name</label>
+                </div>
+            </div>
+            <div class="row no-margin">
+                <div class="col s12 m6">
+                    <material-toggle label="Minimum Wind Speed" color="blue"></material-toggle>
+                </div>
+            </div>
+            <div class="row no-margin">
+                <div class="col s6 m6">
+                    <div class="input-field inline">
+                        <input
+                                 type="number"  id="maxWind" required="" aria-required="true"/>
+                        <label class="active" for="maxWind">Max Speed</label>
+                    </div>
+                    mph
+                </div>
+                <div class="col s6 m6">
+                    <div class="input-field inline">
+                        <input
+                                type="number"  id="minWind" required="" aria-required="true"/>
+                        <label class="active" for="minWind">Min Speed</label>
+                    </div>
+                    mph
+                </div>
+            </div>
+        </form>
     </div>
 </div>

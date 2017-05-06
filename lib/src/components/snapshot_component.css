@@ -23,7 +23,7 @@
 
 .wind-overlay {
     background: rgba(0,0,0,0.2);
-    border-top: 2px solid #999;
+    border-top: 2px solid white;
     height: 50%;
     position: absolute;
     bottom: 0;
