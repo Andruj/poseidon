@@ -2,14 +2,13 @@ part of components;
 
 @Component(
   selector: 'wind-range',
-  styleUrls: const ['src/components/details_component.css'],
+  styleUrls: const ['src/components/wind_range_component.css'],
   templateUrl: 'src/components/wind_range_component.html',
   directives: const [materialDirectives, appDirectives],
   providers: const [materialProviders, app.providers],
 )
 class WindRangeComponent {
   final Logger log = new Logger("WindRangeComponent");
-
 
   final app.Firebase firebase;
 

@@ -10,9 +10,10 @@ class Region {
   Map<String, Location> locations = {};
   Map<String, DateTime> watchlist = {};
 
-
-
-  Region.fromMap(Map json) : this.name = json['name'], this.maxWind = json['maxWind'] ?? 30, this.minWind = json['minWind'] ?? 20 {
+  Region.fromMap(Map json)
+      : this.name = json['name'],
+        this.maxWind = json['maxWind'] ?? 30,
+        this.minWind = json['minWind'] ?? 20 {
     Map<String, Map> _locations = json[locationsKey] ?? {};
     Map<String, String> _watchlist = json['watchlist'] ?? {};
 
@@ -34,7 +35,6 @@ class Region {
           watchlist.values.map((date) => date.toIso8601String()))
     };
   }
-
 
   Region(this.name);
 
